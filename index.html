@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dad Jokes</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="img-jokes">
+    <img src="img/dad.jpeg" alt="dad-icon-joke">
+  </div>
+  <div class="random-joke">
+    <button id="random-joke-btn">Chiste Random</button>
+    <p id="random-joke"></p>
+  </div>
+  <div class="search-jokes">
+    <form id="search-form">
+      <label for="search-input">Buscar Chistes:</label>
+      <input type="text" id="search-input" required>
+      <button type="submit">Buscar</button>
+    </form>
+    <ul id="search-results"></ul>
+  </div>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
