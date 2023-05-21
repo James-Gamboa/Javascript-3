@@ -4,15 +4,20 @@ body {
   padding: 0;
 }
 
+h3{
+  text-align: center;
+}
+
 .img-jokes {
   display: flex;
   justify-content: center;
 }
 
-img{
+img {
   max-width: 400px;
 }
-.random-joke, .search-jokes {
+.random-joke,
+.search-jokes {
   max-width: 600px;
   margin: 0 auto;
 }
@@ -65,4 +70,88 @@ ul {
 li {
   margin: 10px 0;
   font-size: 16px;
+}
+
+a {
+  text-align: center;
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: #0062cc;
+}
+.ecommerce-btn {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+.product {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product img {
+  margin-bottom: 10px;
+}
+
+.color-options {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.other-products ul {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.other-products li {
+  flex-basis: 33%;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.other-products img {
+  max-width: 280px;
+  margin-bottom: 10px;
+}
+
+.other-products span {
+  display: block;
+}
+
+#search-results li {
+  margin-bottom: 5px;
+}
+
+#selected-joke {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.product-image-container {
+  position: relative;
+}
+
+.product-image-container::before {
+  content: attr(data-joke); /* Obtén el chiste del atributo 'data-joke' del contenedor */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 18px;
+  padding: 10px;
+  color: #000;
+  background-color: transparent;
+}
+
+.product-image-container[data-color="white"]::before {
+  color: #000;
+}
+
+.product-image-container[data-color="black"]::before {
+  color: #fff;
 }

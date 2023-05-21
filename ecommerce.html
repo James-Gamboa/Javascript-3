@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ecommerce</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="product">
+      <div id="product-image-container" class="product-image-container">
+      <img
+        id="product-image"
+        src="img/product-shirt-white.jpg"
+        alt="Product Image"
+      />
+      </div>
+      <h2 id="product-title"></h2>
+      <p id="product-price"></p>
+      <p id="selected-joke"></p>
+    </div>
+    <div class="color-options">
+      <label>
+        <input type="radio" id="color-white" name="color" value="white" />
+        Blanco
+      </label>
+      <label>
+        <input type="radio" id="color-black" name="color" value="black" />
+        Negro
+      </label>
+    </div>
+    <button  class ="ecommerce-btn"id="random-joke-btn">Chiste Random</button>
+    <div class="other-products">
+      <h3>Otros productos:</h3>
+      <ul>
+        <li>
+          <a href="#" data-type="pillow" data-color="white">
+            <img
+              src="img/product-pillow-white.jpg"
+              alt="Product Pillow White"
+            />
+            <span>Almohada</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" data-type="case" data-color="white">
+            <img src="img/product-case-white.jpg" alt="Product Case White" />
+            <span>Estuche de Celular </span>
+          </a>
+        </li>
+        <li>
+          <a href="#" data-type="poster" data-color="white">
+            <img
+              src="img/product-poster-white.jpg"
+              alt="Product Poster White"
+            />
+            <span>Poster</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <script type="module" src="js/observer.js"></script>
+    <script type="module" src="js/ecommerce.js"></script>
+  </body>
+</html>
