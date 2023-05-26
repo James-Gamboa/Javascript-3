@@ -136,7 +136,7 @@ a:hover {
 }
 
 .product-image-container::before {
-  content: attr(data-joke); /* Obtén el chiste del atributo 'data-joke' del contenedor */
+  content: attr(data-joke);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -146,12 +146,4 @@ a:hover {
   padding: 10px;
   color: #000;
   background-color: transparent;
-}
-
-.product-image-container[data-color="white"]::before {
-  color: #000;
-}
-
-.product-image-container[data-color="black"]::before {
-  color: #fff;
 }
