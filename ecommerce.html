@@ -6,15 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ecommerce</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
   </head>
   <body>
+    <button id="open-cart-btn" class="open-cart-btn">
+      <i class="fas fa-shopping-cart"></i>
+    </button>
+    <div id="cart-container"></div>
     <div class="product">
       <div id="product-image-container" class="product-image-container">
-      <img
-        id="product-image"
-        src="img/product-shirt-white.jpg"
-        alt="Product Image"
-      />
+        <img
+          id="product-image"
+          src="img/product-shirt-white.jpg"
+          alt="Product Image"
+        />
       </div>
       <h2 id="product-title"></h2>
       <p id="product-price"></p>
@@ -30,7 +38,10 @@
         Negro
       </label>
     </div>
-    <button  class ="ecommerce-btn"id="random-joke-btn">Chiste Random</button>
+    <div id="add-to-cart-container">
+      <button id="add-to-cart-btn">Agregar al carrito</button>
+    </div>
+    <button class="ecommerce-btn" id="random-joke-button">Chiste Random</button>
     <div class="other-products">
       <h3>Otros productos:</h3>
       <ul>
@@ -46,7 +57,7 @@
         <li>
           <a href="#" data-type="case" data-color="white">
             <img src="img/product-case-white.jpg" alt="Product Case White" />
-            <span>Estuche de Celular </span>
+            <span>Estuche de Celular</span>
           </a>
         </li>
         <li>
@@ -61,6 +72,8 @@
       </ul>
     </div>
     <script type="module" src="js/observer.js"></script>
+    <script type="module" src="./modules/cart.js"></script>
     <script type="module" src="js/ecommerce.js"></script>
+    <script type="module" src="js/cardShop.js"></script>
   </body>
 </html>

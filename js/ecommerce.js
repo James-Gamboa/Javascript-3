@@ -181,7 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateSelectedJoke(joke);
   }
 
-  const generateJokeBtn = document.getElementById("random-joke-btn");
+  const generateJokeBtn = document.getElementById("random-joke-button");
   if (generateJokeBtn) {
     generateJokeBtn.addEventListener("click", generateRandomJoke);
   }

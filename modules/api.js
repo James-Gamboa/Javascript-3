@@ -13,7 +13,6 @@ export async function getRandomJoke() {
     throw new Error("Error al obtener el chiste");
   }
 }
-
 export async function searchJokes(keyword) {
   try {
     const response = await fetch(`https://icanhazdadjoke.com/search?term=${keyword}`, {
