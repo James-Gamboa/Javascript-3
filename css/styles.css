@@ -182,11 +182,7 @@ a:hover {
   display: none;
 }
 
-#remove-all-button:hover {
-  background-color: white;
-  color: red;
-}
-
+#remove-all-button:hover,
 .remove-product:hover {
   background-color: white;
   color: red;
@@ -228,4 +224,8 @@ a:hover {
 
 .open-cart-btn:hover{
   background-color: gainsboro;
+}
+
+#add-to-cart-btn {
+  margin: 29px ;
 }
