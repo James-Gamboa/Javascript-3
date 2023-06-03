@@ -7,7 +7,10 @@ const colorPublisher = new Publisher();
 const jokePublisher = new Publisher();
 
 const urlParams = new URLSearchParams(window.location.search);
-let jokeId = urlParams.get("jokeId");
+const selectedJoke = urlParams.get("joke");
+const selectedJokeElement = document.getElementById("selected-joke");
+selectedJokeElement.textContent = selectedJoke;
+
 
 function updateProductDetails() {
   const productImage = document.getElementById("product-image");
@@ -39,8 +42,8 @@ function updateProductDetails() {
 }
 
 function updateSelectedJoke(joke) {
-  const selectedJoke = document.getElementById("selected-joke");
-  selectedJoke.textContent = joke;
+  const selectedJokeElement = document.getElementById("selected-joke");
+  selectedJokeElement.textContent = joke;
 
   const productImageContainer = document.getElementById("product-image-container");
   productImageContainer.dataset.joke = joke;
@@ -56,8 +59,8 @@ if (randomJokeButton) {
       })
       .catch((error) => {
         console.log(error);
-        const selectedJoke = document.getElementById("selected-joke");
-        selectedJoke.textContent = "Error al obtener el chiste";
+        const selectedJokeElement = document.getElementById("selected-joke");
+        selectedJokeElement.textContent = "Error al obtener el chiste";
       });
   });
 }
@@ -70,8 +73,8 @@ function fetchJokeById(jokeId) {
     })
     .catch((error) => {
       console.log(error);
-      const selectedJoke = document.getElementById("selected-joke");
-      selectedJoke.textContent = "Error al obtener el chiste";
+      const selectedJokeElement = document.getElementById("selected-joke");
+      selectedJokeElement.textContent = "Error al obtener el chiste";
     });
 }
 
@@ -91,33 +94,33 @@ document.addEventListener("DOMContentLoaded", () => {
       event.preventDefault();
       const type = link.dataset.type;
       const color = link.dataset.color;
-      const url = `ecommerce.html?type=${type}&color=${color}&jokeId=${jokeId}`;
+      const url = `ecommerce.html?type=${type}&color=${color}&joke=${selectedJoke}`;
       window.location.href = url;
     });
   });
 
   productPublisher.subscribe({
     update: ({ type, color }) => {
-      const url = `ecommerce.html?type=${type}&color=${color}&jokeId=${jokeId}`;
+      const url = `ecommerce.html?type=${type}&color=${color}&joke=${selectedJoke}`;
       history.replaceState(null, null, url);
     },
   });
 
   colorPublisher.subscribe({
     update: (color) => {
-      const url = `ecommerce.html?type=${urlParams.get("type")}&color=${color}&jokeId=${jokeId}`;
+      const url = `ecommerce.html?type=${urlParams.get("type")}&color=${color}&joke=${selectedJoke}`;
       history.replaceState(null, null, url);
     },
   });
 
   jokePublisher.subscribe({
     update: (joke) => {
-      const url = `ecommerce.html?type=${urlParams.get("type")}&color=${urlParams.get("color")}&jokeId=${jokeId}`;
+      const url = `ecommerce.html?type=${urlParams.get("type")}&color=${urlParams.get("color")}&joke=${joke}`;
       history.replaceState(null, null, url);
     },
   });
 
-  jokeId = jokeId || localStorage.getItem("jokeId");
+  const jokeId = urlParams.get("jokeId");
   if (jokeId) {
     fetchJokeById(jokeId);
   }

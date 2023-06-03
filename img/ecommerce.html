@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ecommerce</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <button id="open-cart-btn" class="open-cart-btn">
+      <i class="fas fa-shopping-cart"></i>
+    </button>
+    <div id="cart-container"></div>
+    <div class="product">
+      <div id="product-image-container" class="product-image-container">
+        <img id="product-image" alt="Product Image" />
+      </div>
+      <h2 id="product-title"></h2>
+      <p id="product-price"></p>
+      <p id="selected-joke"></p>
+    </div>
+    <div class="color-options">
+      <label>
+        <input type="radio" id="color-white" name="color" value="white" />
+        Blanco
+      </label>
+      <label>
+        <input type="radio" id="color-black" name="color" value="black" />
+        Negro
+      </label>
+      <div id="add-to-cart-container"></div>
+      <button id="add-to-cart-btn">Agregar al carrito</button>
+    </div>
+    <button class="ecommerce-btn" id="random-joke-button">Chiste Random</button>
+    <div class="other-products">
+      <h3>Otros productos:</h3>
+      <ul id="other-products-container"></ul>
+    </div>
+    <script type="module" src="js/observer.js"></script>
+    <script type="module" src="./modules/cart.js"></script>
+    <script type="module" src="js/ecommerce.js"></script>
+    <script type="module" src="js/cardShop.js"></script>
+  </body>
+</html>
