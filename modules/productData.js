@@ -48,3 +48,7 @@ export const products = {
     },
   },
 };
+
+export function getProductByTypeAndColor(type, color) {
+  return products?.[type]?.[color] || null;
+}

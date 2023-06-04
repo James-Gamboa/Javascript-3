@@ -1,6 +1,6 @@
 // @ts-nocheck
-import Cart from "../modules/cart.js";
-import Product from "../modules/product.js";
+import Cart from "../config/cart.js";
+import Product from "../config/product.js";
 
 const cart = new Cart();
 

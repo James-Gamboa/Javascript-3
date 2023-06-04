@@ -13,7 +13,7 @@ function preselectProducts() {
   const params = getUrlParams();
   const type = params.type || null;
   const color = params.color || 'white';
-  const joke = params.joke || '';
+  const joke = params.joke ? decodeURIComponent(params.joke) : '';
 
   const cartBtn = document.getElementById('open-cart-btn');
   cartBtn.addEventListener('click', function() {
