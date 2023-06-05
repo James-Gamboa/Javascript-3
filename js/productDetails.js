@@ -1,5 +1,6 @@
+// @ts-nocheck
 import { getProductByTypeAndColor } from "../modules/productData.js";
-import { productPublisher, colorPublisher, jokePublisher } from "../modules/updateProduct.js";
+import { productPublisher,jokePublisher } from "../modules/updateProduct.js";
 
 export function updateProductDetails() {
   const productImage = document.getElementById("product-image");

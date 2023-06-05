@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { getRandomJoke } from "./api.js";
 
 const jokeContainer = document.getElementById("random-joke");

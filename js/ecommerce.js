@@ -1,6 +1,7 @@
+// @ts-nocheck
 import { getRandomJoke, getJokeById } from "../modules/api.js";
 import { updateProductDetails } from "./productDetails.js";
-import { updateSelectedJoke } from "./joke.js";
+import { updateSelectedJoke } from "./updateSelectJokes.js";
 import { handleProductLinkClick } from "./eventHandlers.js";
 import { jokePublisher } from "../modules/updateProduct.js";
 
@@ -11,7 +12,7 @@ const selectedJokeId = urlParams.get("joke");
 document.addEventListener("DOMContentLoaded", () => {
   const otherProductLinks = document.querySelectorAll(".other-products a");
   otherProductLinks.forEach((link) => {
-    handleProductLinkClick(link);
+    handleProductLinkClick(link, selectedJokeId);
   });
 
   updateProductDetails();

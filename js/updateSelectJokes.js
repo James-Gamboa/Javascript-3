@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { jokePublisher } from "../modules/updateProduct.js";
 
 export function updateSelectedJoke(joke) {

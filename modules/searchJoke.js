@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { searchJokes } from "./api.js";
 
 const searchForm = document.querySelector("#search-form");
