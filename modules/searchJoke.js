@@ -18,13 +18,16 @@ function showResults(results) {
   results.forEach((result) => {
     const listItem = document.createElement("li");
     const link = document.createElement("a");
-    link.href = "ecommerce.html?joke=" + encodeURIComponent(result);
-    link.textContent = result;
+    const jokeUrl = `ecommerce.html?joke=${encodeURIComponent(result.id)}`;
+    link.href = jokeUrl;
+    link.textContent = result.joke;
     listItem.appendChild(link);
     resultList.appendChild(listItem);
   });
   resultsContainer.appendChild(resultList);
 }
+
+
 
 export function setupSearchForm() {
   searchForm.addEventListener("submit", (event) => {

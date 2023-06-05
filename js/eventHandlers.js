@@ -4,7 +4,11 @@ export function handleProductLinkClick(link) {
     const type = link.dataset.type;
     const color = link.dataset.color;
     const selectedJoke = link.dataset.joke || "";
-    const url = `ecommerce.html?type=${type}&color=${color}&joke=${selectedJoke}`;
-    window.location.href = url;
+    const urlParams = new URLSearchParams();
+    urlParams.set("type", type);
+    urlParams.set("color", color);
+    urlParams.set("joke", selectedJoke);
+    const newUrl = `ecommerce.html?${urlParams.toString()}`;
+    window.location.href = newUrl;
   });
 }

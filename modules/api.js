@@ -25,7 +25,10 @@ export async function searchJokes(keyword) {
       },
     });
     const data = await response.json();
-    const jokes = data.results.map((joke) => joke.joke);
+    const jokes = data.results.map((joke) => ({
+      id: joke.id,
+      joke: joke.joke,
+    }));
     return jokes;
   } catch (error) {
     console.log(error);
