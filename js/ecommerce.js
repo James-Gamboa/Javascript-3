@@ -75,7 +75,6 @@ if (randomJokeButton) {
         const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
         window.history.replaceState({}, "", newUrl);
 
-        // Llama a la función para actualizar los detalles del producto con el nuevo chiste seleccionado
         updateProductDetails(urlParams.get("color"), jokeId);
       })
       .catch((error) => {
