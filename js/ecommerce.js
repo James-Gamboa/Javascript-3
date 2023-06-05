@@ -1,4 +1,4 @@
-import { getRandomJoke, getJokeById } from "../modules/api.js";
+import { getRandomJoke , getJokeById } from "../modules/api.js";
 import { updateProductDetails } from "./productDetails.js";
 import { updateSelectedJoke } from "./joke.js";
 import { handleProductLinkClick } from "./eventHandlers.js";
@@ -16,21 +16,21 @@ function storeSelectedJoke(jokeId) {
   }
 }
 
+function storeJokeId() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const jokeId = urlParams.get("joke");
+  if (jokeId !== "undefined") {
+    selectedJoke = jokeId;
+    selectedJokeElement.textContent = jokeId;
+    storeSelectedJoke(jokeId);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const otherProductLinks = document.querySelectorAll(".other-products a");
   otherProductLinks.forEach((link) => {
-    handleProductLinkClick(link, selectedJoke);
+    handleProductLinkClick(link);
   });
-
-  function storeJokeId() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const jokeId = urlParams.get("joke");
-    if (jokeId !== "undefined") {
-      selectedJoke = jokeId;
-      selectedJokeElement.textContent = jokeId;
-      storeSelectedJoke(jokeId);
-    }
-  }
 
   window.addEventListener("beforeunload", storeJokeId);
 
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const storedJokeId = localStorage.getItem("selectedJoke");
 if (storedJokeId) {
-  getJokeById(storedJokeId)
+getJokeById(storedJokeId)
     .then((newJoke) => {
       selectedJoke = newJoke;
       selectedJokeElement.textContent = newJoke;
@@ -62,11 +62,21 @@ if (randomJokeButton) {
   randomJokeButton.addEventListener("click", () => {
     getRandomJoke()
       .then((newJoke) => {
-        selectedJoke = newJoke;
-        selectedJokeElement.textContent = newJoke;
-        updateSelectedJoke(newJoke);
-        jokePublisher.notify(newJoke);
-        storeSelectedJoke(newJoke);
+        const jokeId = newJoke.id;
+        const jokeText = newJoke.joke;
+        selectedJoke = jokeId;
+        selectedJokeElement.textContent = jokeText;
+        updateSelectedJoke(jokeText);
+        jokePublisher.notify(jokeId);
+        storeSelectedJoke(jokeId);
+
+        const urlParams = new URLSearchParams(window.location.search);
+        urlParams.set("joke", jokeId);
+        const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+        window.history.replaceState({}, "", newUrl);
+
+        // Llama a la función para actualizar los detalles del producto con el nuevo chiste seleccionado
+        updateProductDetails(urlParams.get("color"), jokeId);
       })
       .catch((error) => {
         console.log(error);

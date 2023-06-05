@@ -3,16 +3,20 @@ export async function getRandomJoke() {
     const response = await fetch("https://icanhazdadjoke.com/", {
       headers: {
         Accept: "application/json",
-      },
+    },
     });
     const data = await response.json();
-    const joke = data.joke;
+    const joke = {
+      id: data.id,
+      joke: data.joke,
+    };
     return joke;
   } catch (error) {
     console.log(error);
     throw new Error("Error al obtener el chiste");
   }
 }
+
 export async function searchJokes(keyword) {
   try {
     const response = await fetch(`https://icanhazdadjoke.com/search?term=${keyword}`, {

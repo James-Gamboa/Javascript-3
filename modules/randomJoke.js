@@ -5,8 +5,8 @@ const jokeContainer = document.getElementById("random-joke");
 export function displayJoke(joke, urlParams) {
   const productType = urlParams.get("type") || "shirt";
   const productColor = urlParams.get("color") || "white";
-  const jokeUrl = `ecommerce.html?type=${productType}&color=${productColor}&joke=${encodeURIComponent(joke)}`;
-  jokeContainer.innerHTML = `<a href="${jokeUrl}">${joke}</a>`;
+  const jokeUrl = `ecommerce.html?type=${productType}&color=${productColor}&joke=${encodeURIComponent(joke.id)}`;
+  jokeContainer.innerHTML = `<a href="${jokeUrl}">${joke.joke}</a>`;
 }
 
 export function setupRandomJokeButton(urlParams) {
