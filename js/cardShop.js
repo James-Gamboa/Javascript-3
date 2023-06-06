@@ -1,94 +1,30 @@
-// @ts-nocheck
 import Cart from "../config/cart.js";
-import Product from "../config/product.js";
 import { addToCartClicked } from "../modules/addToCart.js";
-import { removeAllFromCartClicked } from "../modules/removeAllFromCart.js";
-import { removeProductFromCartClicked } from "../modules/removeProductFromCart.js";
 import { openCartButtonClicked } from "../modules/openCart.js";
 import { createProductObject } from "../modules/createProduct.js";
+import { loadCartFromLocalStorage } from "../modules/loadCart.js";
+import { saveCartToLocalStorage } from "../modules/saveCart.js";
+import { updateCartList } from "../modules/updateCart.js";
 
 const cart = new Cart();
-
-const addToCartButton = document.getElementById("add-to-cart-btn");
-addToCartButton.addEventListener("click", addToCartClicked(cart, createProductObject, updateCartList, saveCartToLocalStorage));
-
-const openCartButton = document.getElementById("open-cart-btn");
 const cartContainer = document.getElementById("cart-container");
 
-openCartButton.addEventListener("click", () => {
-  loadCartFromLocalStorage(); 
-  openCartButtonClicked(cartContainer)(); 
-});
-
-function loadCartFromLocalStorage() {
-  const cartItems = localStorage.getItem("cartItems");
-
-  if (cartItems) {
-    const parsedCartItems = JSON.parse(cartItems);
-    parsedCartItems.forEach((item) => {
-      const product = new Product(
-        item.title,
-        item.color,
-        item.price,
-        item.joke,
-        item.image
-      );
-      cart.addToCart(product);
-    });
-    updateCartList();
-  }
+const addToCartButton = document.getElementById("add-to-cart-btn");
+if (addToCartButton) {
+  addToCartButton.addEventListener("click", addToCartClicked(cart, createProductObject, updateCartList, saveCartToLocalStorage));
 }
 
-function saveCartToLocalStorage() {
-  const cartItems = JSON.stringify(cart.products);
-  localStorage.setItem("cartItems", cartItems);
+const openCartButton = document.getElementById("open-cart-btn");
+if (openCartButton) {
+  openCartButton.addEventListener("click", () => {
+    loadCartFromLocalStorage(cart, updateCartList);
+    openCartButtonClicked(cartContainer)();
+  });
 }
 
-function updateCartList() {
-  const cartContainer = document.getElementById("cart-container");
-  cartContainer.innerHTML = "";
-
-  if (cart.products.length > 0) {
-    cart.products.forEach((product) => {
-      const productElement = document.createElement("div");
-      productElement.className = "cart-product";
-      productElement.innerHTML = product.createMarkup();
-
-      const removeButton = productElement.querySelector(".remove-product");
-      removeButton.addEventListener("click", () => {
-        const index = cart.products.indexOf(product);
-        removeProductFromCartClicked(cart, updateCartList, saveCartToLocalStorage)(index);
-      });
-
-      cartContainer.appendChild(productElement);
-      
-    });
-
-    const closeButton = document.createElement("button");
-    closeButton.className = "close-button";
-    closeButton.innerHTML = "X";
-    closeButton.addEventListener("click", () => {
-      cartContainer.innerHTML = "";
-      cartContainer.style.display = "none";
-    });
-
-    const removeAllButton = document.createElement("button");
-    removeAllButton.id = "remove-all-button";
-    removeAllButton.textContent = "Remover todo";
-    removeAllButton.addEventListener("click", removeAllFromCartClicked(cart, updateCartList, saveCartToLocalStorage));
-
-    cartContainer.appendChild(closeButton);
-    cartContainer.appendChild(removeAllButton);
-
-    cartContainer.style.display = "block";
-  } else {
-    cartContainer.style.display = "none";
-  }
-}
-
-loadCartFromLocalStorage();
-updateCartList();
-
-addToCartButton.addEventListener("click", saveCartToLocalStorage);
 const removeAllButton = document.getElementById("remove-all-button");
-removeAllButton.addEventListener("click", saveCartToLocalStorage);
+if (removeAllButton) {
+  removeAllButton.addEventListener("click", () => {
+    saveCartToLocalStorage(cart);
+  });
+}

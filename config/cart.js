@@ -40,6 +40,11 @@ class Cart {
       button.addEventListener("click", () => this.removeFromCart(i));
     }
   }
+  
+  clearCart() {
+    this.products = [];
+    this.updateCartList();
+  }
 }
 
 export default Cart;

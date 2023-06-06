@@ -8,7 +8,7 @@ export function addToCartClicked(cart, createProductObject, updateCartList, save
     const productImagePath = productImage.getAttribute("src");
     product.image = productImagePath;
 
-    updateCartList();
-    saveCartToLocalStorage();
+    updateCartList(cart, saveCartToLocalStorage);
+    saveCartToLocalStorage(cart);
   };
 }

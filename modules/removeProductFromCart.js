@@ -1,7 +1,7 @@
-export function removeProductFromCartClicked(cart, updateCartList, saveCartToLocalStorage) {
-  return function (index) {
+export function removeProductFromCartClicked(cart, updateCartListFunction, saveCartToLocalStorage) {
+  return function(index) {
     cart.removeFromCart(index);
-    updateCartList();
-    saveCartToLocalStorage();
+    updateCartListFunction();
+    saveCartToLocalStorage(cart);
   };
 }

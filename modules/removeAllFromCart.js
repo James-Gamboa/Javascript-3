@@ -1,7 +1,5 @@
-export function removeAllFromCartClicked(cart, updateCartList, saveCartToLocalStorage) {
-  return function () {
-    cart.removeAllFromCart();
-    updateCartList();
-    saveCartToLocalStorage();
-  };
+export function removeAllFromCartClicked(cart, updateCartListFunction, saveCartToLocalStorage) {
+  cart.removeAllFromCart();
+  updateCartListFunction();
+  saveCartToLocalStorage(cart);
 }
