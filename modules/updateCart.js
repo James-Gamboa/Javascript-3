@@ -16,8 +16,7 @@ export function updateCartList(cart) {
       removeButton.addEventListener("click", () => {
         const index = cart.products.indexOf(product);
         removeProductFromCartClicked(cart, updateCartList, saveCartToLocalStorage)(index);
-        updateCartList(cart); // Actualizar la lista de compra después de remover el producto
-      });
+        updateCartList(cart);
 
       cartContainer.appendChild(productElement);
     });
@@ -28,7 +27,7 @@ export function updateCartList(cart) {
     closeButton.addEventListener("click", () => {
       cartContainer.innerHTML = "";
       cartContainer.style.display = "none";
-      saveCartToLocalStorage(cart); // Guardar el carrito en el almacenamiento local al cerrar la lista de compra
+      saveCartToLocalStorage(cart); 
     });
 
     const removeAllButton = document.createElement("button");

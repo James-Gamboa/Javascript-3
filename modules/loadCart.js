@@ -2,8 +2,7 @@ import Product from "../config/product.js";
 import { updateCartList } from "./updateCart.js";
 
 export function loadCartFromLocalStorage(cart) {
-  cart.clearCart(); // Limpiar el carrito antes de cargar los productos
-
+  cart.clearCart(); 
   const cartItems = localStorage.getItem("cartItems");
 
   if (cartItems) {
