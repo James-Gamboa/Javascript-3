@@ -23,7 +23,10 @@ function createProductObject() {
 const openCartButton = document.getElementById("open-cart-btn");
 const cartContainer = document.getElementById("cart-container");
 
-openCartButton.addEventListener("click", openCartButtonClicked(cartContainer));
+openCartButton.addEventListener("click", () => {
+  loadCartFromLocalStorage(); 
+  openCartButtonClicked(cartContainer)(); 
+});
 
 function loadCartFromLocalStorage() {
   const cartItems = localStorage.getItem("cartItems");
@@ -66,6 +69,7 @@ function updateCartList() {
       });
 
       cartContainer.appendChild(productElement);
+      
     });
 
     const closeButton = document.createElement("button");
