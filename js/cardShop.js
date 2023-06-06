@@ -5,20 +5,12 @@ import { addToCartClicked } from "../modules/addToCart.js";
 import { removeAllFromCartClicked } from "../modules/removeAllFromCart.js";
 import { removeProductFromCartClicked } from "../modules/removeProductFromCart.js";
 import { openCartButtonClicked } from "../modules/openCart.js";
+import { createProductObject } from "../modules/createProduct.js";
 
 const cart = new Cart();
 
 const addToCartButton = document.getElementById("add-to-cart-btn");
 addToCartButton.addEventListener("click", addToCartClicked(cart, createProductObject, updateCartList, saveCartToLocalStorage));
-
-function createProductObject() {
-  const productTitle = document.getElementById("product-title").textContent;
-  const productColor = document.querySelector('input[name="color"]:checked').value;
-  const productPrice = document.getElementById("product-price").textContent;
-  const selectedJoke = document.getElementById("selected-joke").textContent;
-
-  return new Product(productTitle, productColor, productPrice, selectedJoke);
-}
 
 const openCartButton = document.getElementById("open-cart-btn");
 const cartContainer = document.getElementById("cart-container");
