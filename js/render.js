@@ -33,7 +33,7 @@ const renderEvents = (events) => {
     eventItem.appendChild(dateElement);
 
     const locationElement = document.createElement("p");
-    locationElement.innerText = `${event.city} • ${event.state}, ${event.address}`;
+    locationElement.innerText = `${event.location.city} • ${event.location.state}, ${event.location.address}`;
     eventItem.appendChild(locationElement);
 
     const price = document.createElement("span");
