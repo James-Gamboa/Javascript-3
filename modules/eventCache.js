@@ -3,7 +3,7 @@ const eventCache = {};
 
 const cacheHandler = {
   get(target, prop) {
-    if (prop === 'getEventsFromCache') {
+    if (prop === "getEventsFromCache") {
       return (category) => {
         if (!target[category]) {
           target[category] = getEventsByCategory(category);

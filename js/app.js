@@ -20,6 +20,13 @@ const renderTabs = () => {
     tab.setAttribute("data-category", category.category);
     tabsContainer.appendChild(tab);
   });
+
+  const myAccountTab = document.createElement("li");
+  const myAccountLink = document.createElement("a");
+  myAccountLink.href = "myaccount.html";
+  myAccountLink.textContent = "My Account";
+  myAccountTab.appendChild(myAccountLink);
+  tabsContainer.appendChild(myAccountTab);
 };
 
 tabsContainer.addEventListener("click", async (event) => {
@@ -28,12 +35,12 @@ tabsContainer.addEventListener("click", async (event) => {
   if (category) {
     let events = getEventsFromCache(category);
 
-    if (events.length === 0) {
+    if (!events) {
       events = await getEventsByCategory(category);
       setEventsInCache(category, events);
     }
 
-    renderEventsByCategory(category);
+    renderEventsByCategory(category, events);
   }
 });
 
