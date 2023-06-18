@@ -3,16 +3,6 @@ import { renderEvents } from "./render.js";
 
 const tabsContainer = document.getElementById("tabs");
 
-const renderTabs = () => {
-  const tabs = tabsContainer.querySelectorAll("li");
-  tabs.forEach((tab) => {
-    tab.addEventListener("click", () => {
-      const selectedTab = tab.getAttribute("data-tab");
-      renderEventsByTab(selectedTab);
-    });
-  });
-};
-
 const renderEventsByTab = (tab) => {
   const events = getEventsByTab(tab);
   renderEvents(events, tab, true);
@@ -31,7 +21,17 @@ const getEventsByTab = (tab) => {
   }
 };
 
-const removeFromList = (event, tab) => {
+const renderTabs = () => {
+  const tabs = tabsContainer.querySelectorAll("li");
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const selectedTab = tab.getAttribute("data-tab");
+      renderEventsByTab(selectedTab);
+    });
+  });
+};
+
+export const removeFromList = (event, tab) => {
   switch (tab) {
     case "favorites":
       state.removeFromFavorites(event);
@@ -48,5 +48,3 @@ const removeFromList = (event, tab) => {
 };
 
 renderTabs();
-renderEventsByTab();
-export { removeFromList };

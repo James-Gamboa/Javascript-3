@@ -1,7 +1,8 @@
 import { getEventsFromCache } from "../modules/eventCache.js";
 import state from "../modules/state.js";
+import { removeFromList } from "./myaccount.js";
 
-export const renderEventItem = (event, tab, removeButton = false) => {
+export const renderEventItem = (event, tab, removeBtn) => {
   const eventItem = document.createElement("div");
   eventItem.classList.add("event-item");
   eventItem.setAttribute("data-event-id", event.id);
@@ -37,7 +38,7 @@ export const renderEventItem = (event, tab, removeButton = false) => {
   price.innerText = event.price === 0 ? "Free" : `$${event.price.toFixed(2)}`;
   eventItem.appendChild(price);
 
-  if (!removeButton) {
+  if (!removeBtn) {
     const favoritesButton = document.createElement("button");
     favoritesButton.innerHTML = '<i class="far fa-heart"></i>';
     favoritesButton.addEventListener("click", () => {
@@ -79,19 +80,19 @@ export const renderEventItem = (event, tab, removeButton = false) => {
     eventItem.appendChild(goingButton);
   }
 
-  if (removeButton) {
-    const removeButton = document.createElement("button");
-    removeButton.innerText = "Remove";
-    removeButton.addEventListener("click", () => {
+  if (removeBtn) {
+    const removeBtn = document.createElement("button");
+    removeBtn.innerText = "Remove";
+    removeBtn.addEventListener("click", () => {
       removeFromList(event, tab);
     });
-    eventItem.appendChild(removeButton);
+    eventItem.appendChild(removeBtn);
   }
 
   return eventItem;
 };
 
-export const renderEvents = (events, category, removeButton = false) => {
+export const renderEvents = (events, category, removeBtn) => {
   const eventsCategory = document.getElementById("events");
   eventsCategory.innerHTML = "";
 
@@ -101,7 +102,7 @@ export const renderEvents = (events, category, removeButton = false) => {
     eventsCategory.appendChild(message);
   } else {
     events.forEach((event) => {
-      const eventItem = renderEventItem(event, category, removeButton);
+      const eventItem = renderEventItem(event, category, removeBtn);
       eventsCategory.appendChild(eventItem);
     });
   }
