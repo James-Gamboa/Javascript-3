@@ -46,6 +46,7 @@ export default function renderEventsWithActions(events, tab, showRemoveButton, u
     if (showRemoveButton) {
       const removeButton = document.createElement("button");
       removeButton.innerText = "Remove";
+      removeButton.classList.add("remove");
       removeButton.addEventListener("click", () => {
         removeFromList(event, tab);
         if (updateEventList) {
@@ -75,7 +76,7 @@ export default function renderEventsWithActions(events, tab, showRemoveButton, u
           interestedButton.innerText = "Interested";
         } else {
           state.addToInterested(event);
-          interestedButton.innerText = "Remove";
+          interestedButton.innerText = "Not Going";
         }
       });
       eventItem.appendChild(interestedButton);
@@ -89,7 +90,7 @@ export default function renderEventsWithActions(events, tab, showRemoveButton, u
         } else {
           state.addToGoing(event);
           state.removeFromInterested(event);
-          goingButton.innerText = "Remove";
+          goingButton.innerText = "Not Interested";
         }
       });
       eventItem.appendChild(goingButton);
