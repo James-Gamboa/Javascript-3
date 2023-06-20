@@ -1,4 +1,5 @@
-import renderEventsWithActions from "./render.js";
+// @ts-nocheck
+import { renderEvents, renderEventsByCategory } from "./render.js";
 import state from "../modules/state.js";
 
 const tabs = document.querySelectorAll(".tabs li");
@@ -30,6 +31,8 @@ function removeFromList(event, tab) {
     default:
       break;
   }
+  
+  renderEventsByTab(tab);
 }
 
 const updateEventList = () => {
@@ -42,7 +45,7 @@ const updateEventList = () => {
 
 const renderEventsByTab = (tab) => {
   const events = getEventsByTab(tab);
-  renderEventsWithActions(events, tab, removeFromList, updateEventList);
+  renderEvents(events, tab, true, removeFromList, updateEventList);
 };
 
 tabs.forEach((tab) => {
@@ -55,7 +58,5 @@ tabs.forEach((tab) => {
     renderEventsByTab(tab.getAttribute("data-tab"));
   });
 });
-
-renderEventsByTab("favorites");
 
 export { removeFromList };
