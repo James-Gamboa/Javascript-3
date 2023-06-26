@@ -3,7 +3,7 @@ import { getEventsByCategory } from "../modules/api.js";
 import { renderEventsByCategory } from "./render.js";
 import { getEventsFromCache, setEventsInCache } from "../modules/eventCache.js";
 
-const categories = [
+const tabCategories = [
   { name: "Music", category: "music" },
   { name: "Sports", category: "sports" },
   { name: "Business", category: "business" },
@@ -14,7 +14,7 @@ const categories = [
 const tabsContainer = document.getElementById("tabs");
 
 const renderTabs = () => {
-  categories.forEach((category) => {
+  tabCategories.forEach((category) => {
     const tab = document.createElement("li");
     tab.textContent = category.name;
     tab.setAttribute("data-category", category.category);
@@ -27,6 +27,18 @@ const renderTabs = () => {
   myAccountLink.textContent = "My Account";
   myAccountTab.appendChild(myAccountLink);
   tabsContainer.appendChild(myAccountTab);
+
+  const tabElements = tabsContainer.children;
+  for (let i = 0; i < tabElements.length; i++) {
+    const tab = tabElements[i];
+    if (
+      !tab.getAttribute("data-category") &&
+      !tab.querySelector("a[href='myaccount.html']")
+    ) {
+      tabsContainer.removeChild(tab);
+      i--;
+    }
+  }
 };
 
 tabsContainer.addEventListener("click", async (event) => {

@@ -1,8 +1,23 @@
 // @ts-nocheck
-import { renderEvents, renderEventsByCategory } from "./render.js";
+import { renderEvents } from "./render.js";
 import state from "../modules/state.js";
 
-const tabs = document.querySelectorAll(".tabs li");
+const tabsContainer = document.getElementById("tabs");
+
+const tabOptions = [
+  { name: "Favorites", category: "favorites" },
+  { name: "Interested", category: "interested" },
+  { name: "Going", category: "going" },
+];
+
+const renderTabsOption = () => {
+  tabOptions.forEach((tabOption) => {
+    const tab = document.createElement("li");
+    tab.textContent = tabOption.name;
+    tab.setAttribute("data-tab", tabOption.category);
+    tabsContainer.appendChild(tab);
+  });
+};
 
 const getEventsByTab = (tab) => {
   switch (tab) {
@@ -17,7 +32,7 @@ const getEventsByTab = (tab) => {
   }
 };
 
-function removeFromList(event, tab) {
+const removeFromList = (event, tab) => {
   switch (tab) {
     case "favorites":
       state.removeFromFavorites(event);
@@ -31,9 +46,9 @@ function removeFromList(event, tab) {
     default:
       break;
   }
-  
+
   renderEventsByTab(tab);
-}
+};
 
 const updateEventList = () => {
   const activeTab = document.querySelector(".tabs li.active");
@@ -48,15 +63,18 @@ const renderEventsByTab = (tab) => {
   renderEvents(events, tab, true, removeFromList, updateEventList);
 };
 
-tabs.forEach((tab) => {
-  tab.addEventListener("click", () => {
+tabsContainer.addEventListener("click", (event) => {
+  const tab = event.target.getAttribute("data-tab");
+  if (tab) {
     const activeTab = document.querySelector(".tabs li.active");
     if (activeTab) {
       activeTab.classList.remove("active");
     }
-    tab.classList.add("active");
-    renderEventsByTab(tab.getAttribute("data-tab"));
-  });
+    event.target.classList.add("active");
+    renderEventsByTab(tab);
+  }
 });
+
+renderTabsOption();
 
 export { removeFromList };
