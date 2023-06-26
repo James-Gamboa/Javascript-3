@@ -1,15 +1,7 @@
-// @ts-nocheck
 import { getEventsByCategory } from "../modules/api.js";
 import { renderEventsByCategory } from "./render.js";
 import { getEventsFromCache, setEventsInCache } from "../modules/eventCache.js";
-
-const tabCategories = [
-  { name: "Music", category: "music" },
-  { name: "Sports", category: "sports" },
-  { name: "Business", category: "business" },
-  { name: "Food", category: "food" },
-  { name: "Art", category: "art" },
-];
+import tabCategories from "../modules/tabCategories.js";
 
 const tabsContainer = document.getElementById("tabs");
 

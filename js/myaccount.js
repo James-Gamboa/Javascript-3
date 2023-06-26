@@ -1,14 +1,8 @@
-// @ts-nocheck
 import { renderEvents } from "./render.js";
 import state from "../modules/state.js";
+import tabOptions from "../modules/tabOptions.js";
 
 const tabsContainer = document.getElementById("tabs");
-
-const tabOptions = [
-  { name: "Favorites", category: "favorites" },
-  { name: "Interested", category: "interested" },
-  { name: "Going", category: "going" },
-];
 
 const renderTabsOption = () => {
   tabOptions.forEach((tabOption) => {
