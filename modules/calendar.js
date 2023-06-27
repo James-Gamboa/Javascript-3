@@ -1,8 +1,7 @@
 // @ts-nocheck
 const renderCalendar = (month, year) => {
   const calendar = document.querySelector("#calendar");
-  const today = new Date();
-  let selectedDate = today;
+  let selectedDate = new Date(year, month , 0);
 
   const months = [
     "January", "February", "March", "April", "May", "June",
@@ -50,26 +49,10 @@ const renderCalendar = (month, year) => {
     const target = event.target;
 
     if (target.classList.contains("prev")) {
-      const currentMonthIndex = selectedDate.getMonth();
-      const currentYear = selectedDate.getFullYear();
-
-      selectedDate.setMonth(currentMonthIndex - 1);
-
-      if (currentMonthIndex === 0) {
-        selectedDate.setFullYear(currentYear - 1);
-      }
-
+      selectedDate.setMonth(selectedDate.getMonth() - 1);
       renderCalendar(selectedDate.getMonth(), selectedDate.getFullYear());
     } else if (target.classList.contains("next")) {
-      const currentMonthIndex = selectedDate.getMonth();
-      const currentYear = selectedDate.getFullYear();
-
-      selectedDate.setMonth(currentMonthIndex + 1);
-
-      if (currentMonthIndex === 11) {
-        selectedDate.setFullYear(currentYear + 1);
-      }
-
+      selectedDate.setMonth(selectedDate.getMonth() + 1);
       renderCalendar(selectedDate.getMonth(), selectedDate.getFullYear());
     }
   });
@@ -96,3 +79,4 @@ const renderCalendar = (month, year) => {
 };
 
 export { renderCalendar };
+
