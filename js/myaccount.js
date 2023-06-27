@@ -1,8 +1,12 @@
+// @ts-nocheck
 import { renderEvents } from "./render.js";
 import state from "../modules/state.js";
 import tabOptions from "../modules/tabOptions.js";
+import { renderCalendar } from "../modules/calendar.js";
 
+const today = new Date();
 const tabsContainer = document.getElementById("tabs");
+const calendarContainer = document.getElementById("calendar");
 
 const renderTabsOption = () => {
   tabOptions.forEach((tabOption) => {
@@ -66,6 +70,16 @@ tabsContainer.addEventListener("click", (event) => {
     }
     event.target.classList.add("active");
     renderEventsByTab(tab);
+  }
+});
+
+tabsContainer.addEventListener("click", (event) => {
+  const tab = event.target.getAttribute("data-tab");
+  if (tab === "calendar") {
+    calendarContainer.style.display = "block";
+    renderCalendar(today.getMonth(), today.getFullYear());
+  } else {
+    calendarContainer.style.display = "none";
   }
 });
 

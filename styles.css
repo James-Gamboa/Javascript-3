@@ -74,3 +74,45 @@ a {
   color: #fff;
   cursor: pointer;
 }
+
+#calendar {
+  font-family: Arial, sans-serif;
+  width: 100%;
+  display: none;
+}
+
+#calendar .month {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#calendar .month .prev,
+#calendar .month .next {
+  cursor: pointer;
+}
+
+#calendar .days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+#calendar .day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+
+#calendar .day.selected {
+  background-color: #2196f3;
+  color: #fff;
+}
+
+#calendar .day:hover {
+  background-color: #e0e0e0;
+}

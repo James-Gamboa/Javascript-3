@@ -1,123 +1,87 @@
 // @ts-nocheck
-import { renderEvents } from "../js/render.js";
-import { getEventsFromCache } from "../modules/eventCache.js";
-import state from "../modules/state.js";
+const renderCalendar = (month, year) => {
+  const calendar = document.querySelector("#calendar");
+  const today = new Date();
+  let selectedDate = today;
 
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
+  const months = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
 
-const calendarContainer = document.getElementById("calendar");
-const calendarTitle = document.createElement("h2");
-const previousMonthButton = document.createElement("button");
-const nextMonthButton = document.createElement("button");
-const overlay = document.createElement("div");
-overlay.classList.add("overlay");
-overlay.addEventListener("click", hideEventCard);
-overlay.style.display = "none";
+  const lastDay = new Date(year, month + 1, 0);
+  const numDays = lastDay.getDate();
 
-let currentMonth = new Date().getMonth();
-let currentYear = new Date().getFullYear();
-let activeEvent = null;
+  let calendarHTML = `
+    <div class="month">
+      <div class="prev">&lt;</div>
+      <div class="current-month">${months[month]} ${year}</div>
+      <div class="next">&gt;</div>
+    </div>
+    <div class="days">
+  `;
 
-calendarTitle.classList.add("calendar-title");
-previousMonthButton.classList.add("calendar-button", "previous");
-previousMonthButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
-previousMonthButton.addEventListener("click", showPreviousMonth);
-nextMonthButton.classList.add("calendar-button", "next");
-nextMonthButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
-nextMonthButton.addEventListener("click", showNextMonth);
+  for (let i = 1; i <= numDays; i++) {
+    const currentDate = new Date(year, month, i);
+    const isSelected = currentDate.toDateString() === selectedDate.toDateString();
 
-calendarContainer.appendChild(calendarTitle);
-calendarContainer.appendChild(previousMonthButton);
-calendarContainer.appendChild(nextMonthButton);
-calendarContainer.appendChild(overlay);
-
-function renderCalendar() {
-  const events = getEventsFromCache("calendar");
-  const calendar = generateCalendar(currentMonth, currentYear, events);
-  calendarContainer.appendChild(calendar);
-}
-
-function generateCalendar(month, year, events) {
-  const calendar = document.createElement("div");
-  calendar.classList.add("calendar");
-
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-  const firstDayOfMonth = new Date(year, month, 1).getDay();
-
-  calendarTitle.textContent = `${months[month]} ${year}`;
-
-  const daysContainer = document.createElement("div");
-  daysContainer.classList.add("days-container");
-
-  // Render empty cells for previous month
-  for (let i = 0; i < firstDayOfMonth; i++) {
-    const emptyCell = document.createElement("div");
-    emptyCell.classList.add("day", "empty");
-    daysContainer.appendChild(emptyCell);
+    calendarHTML += `
+      <div class="day${isSelected ? " selected" : ""}" data-date="${currentDate.toDateString()}">
+        ${i}
+      </div>
+    `;
   }
 
-  // Render days of current month
-  for (let day = 1; day <= daysInMonth; day++) {
-    const dateCell = document.createElement("div");
-    dateCell.classList.add("day");
-    dateCell.textContent = day;
-    dateCell.addEventListener("click", () => showEventsForDay(day, month, year, events));
-    daysContainer.appendChild(dateCell);
-  }
+  calendarHTML += `</div>`;
+  calendar.innerHTML = calendarHTML;
 
-  calendar.appendChild(daysContainer);
-  return calendar;
-}
+  calendar.addEventListener("click", (event) => {
+    const target = event.target;
 
-function showEventsForDay(day, month, year, events) {
-  const eventDate = new Date(year, month, day);
-  const filteredEvents = events.filter(event => isSameDay(new Date(event.date), eventDate));
-  renderEvents(filteredEvents);
-}
+    if (target.classList.contains("prev")) {
+      const currentMonthIndex = selectedDate.getMonth();
+      const currentYear = selectedDate.getFullYear();
 
-function isSameDay(date1, date2) {
-  return date1.getDate() === date2.getDate() &&
-    date1.getMonth() === date2.getMonth() &&
-    date1.getFullYear() === date2.getFullYear();
-}
+      selectedDate.setMonth(currentMonthIndex - 1);
 
-function showPreviousMonth() {
-  currentMonth = (currentMonth - 1 + 12) % 12;
-  currentYear = currentMonth === 11 ? currentYear - 1 : currentYear;
-  clearCalendar();
-  renderCalendar();
-}
+      if (currentMonthIndex === 0) {
+        selectedDate.setFullYear(currentYear - 1);
+      }
 
-function showNextMonth() {
-  currentMonth = (currentMonth + 1) % 12;
-  currentYear = currentMonth === 0 ? currentYear + 1 : currentYear;
-  clearCalendar();
-  renderCalendar();
-}
+      renderCalendar(selectedDate.getMonth(), selectedDate.getFullYear());
+    } else if (target.classList.contains("next")) {
+      const currentMonthIndex = selectedDate.getMonth();
+      const currentYear = selectedDate.getFullYear();
 
-function clearCalendar() {
-  while (calendarContainer.firstChild) {
-    calendarContainer.firstChild.remove();
-  }
-}
+      selectedDate.setMonth(currentMonthIndex + 1);
 
-function hideEventCard() {
-  overlay.style.display = "none";
-  if (activeEvent) {
-    activeEvent.classList.remove("active");
-    activeEvent = null;
-  }
-}
+      if (currentMonthIndex === 11) {
+        selectedDate.setFullYear(currentYear + 1);
+      }
+
+      renderCalendar(selectedDate.getMonth(), selectedDate.getFullYear());
+    }
+  });
+
+  calendar.addEventListener("click", (event) => {
+    const target = event.target;
+
+    if (target.classList.contains("day")) {
+      const selectedDayElement = calendar.querySelector(".selected");
+
+      if (selectedDayElement) {
+        selectedDayElement.classList.remove("selected");
+      }
+
+      target.classList.add("selected");
+
+      const date = target.getAttribute("data-date");
+
+      if (date) {
+        selectedDate = new Date(date);
+      }
+    }
+  });
+};
+
+export { renderCalendar };
