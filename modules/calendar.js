@@ -9,6 +9,10 @@ const renderCalendar = (month, year) => {
     "July", "August", "September", "October", "November", "December"
   ];
 
+  const daysOfWeek = [
+    "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
+  ];
+
   const lastDay = new Date(year, month + 1, 0);
   const numDays = lastDay.getDate();
 
@@ -19,7 +23,14 @@ const renderCalendar = (month, year) => {
       <div class="next">&gt;</div>
     </div>
     <div class="days">
+      <div class="day-labels">
   `;
+
+  for (let i = 0; i < 7; i++) {
+    calendarHTML += `<p>${daysOfWeek[i]}</p>`;
+  }
+
+  calendarHTML += `</div></div><div class="days-grid">`;
 
   for (let i = 1; i <= numDays; i++) {
     const currentDate = new Date(year, month, i);
@@ -27,7 +38,7 @@ const renderCalendar = (month, year) => {
 
     calendarHTML += `
       <div class="day${isSelected ? " selected" : ""}" data-date="${currentDate.toDateString()}">
-        ${i}
+        <p class="day-number">${i}</p>
       </div>
     `;
   }

@@ -7,6 +7,10 @@ a {
   text-decoration: none;
 }
 
+a:hover{
+  color: black ;
+}
+
 .tabs {
   list-style-type: none;
   padding: 0px;
@@ -24,7 +28,7 @@ a {
   padding: 30px;
   cursor: pointer;
 }
-.tabs li:hover {
+.tabs li:hover{
   background: white;
   color: black ;
 }
@@ -94,6 +98,25 @@ a {
 }
 
 #calendar .days {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+#calendar .day-labels {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 5px;
+  width: 98%;
+}
+
+#calendar .day-labels p {
+  text-align: center;
+  font-weight: bold;
+}
+
+#calendar .days-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 5px;
