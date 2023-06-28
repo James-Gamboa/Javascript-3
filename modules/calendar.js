@@ -138,6 +138,4 @@ function renderCalendar(month, year) {
   });
 }
 
-renderCalendar(state.selectedDate.getMonth(), state.selectedDate.getFullYear());
-
 export { renderCalendar };

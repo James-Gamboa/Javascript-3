@@ -140,3 +140,15 @@ a:hover{
 #calendar .day:hover {
   background-color: #e0e0e0;
 }
+
+#calendar .day.favorite {
+  background-color: pink;
+}
+
+#calendar .day.interested {
+  background-color: yellow;
+}
+
+#calendar .day.going {
+  background-color: green;
+}
