@@ -1,19 +1,26 @@
 // @ts-nocheck
-const renderCalendar = (month, year) => {
-  const calendar = document.querySelector("#calendar");
-  let selectedDate = new Date(year, month , 0);
+import state from "./state.js";
 
+state.selectedDate = new Date();
+
+const calendarContainer = document.getElementById("calendar");
+
+function formatDate(date) {
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function renderCalendar(month, year) {
   const months = [
     "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ];
-
-  const daysOfWeek = [
-    "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
-  ];
-
-  const lastDay = new Date(year, month + 1, 0);
-  const numDays = lastDay.getDate();
+  const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const firstDay = new Date(year, month, 1).getDay(); 
+  const lastDay = new Date(year, month + 1, 0).getDate();
+  const numDays = lastDay;
 
   let calendarHTML = `
     <div class="month">
@@ -31,9 +38,13 @@ const renderCalendar = (month, year) => {
 
   calendarHTML += `</div></div><div class="days-grid">`;
 
+  for (let i = 0; i < firstDay; i++) {
+    calendarHTML += `<div class="day empty"></div>`;
+  }
+
   for (let i = 1; i <= numDays; i++) {
     const currentDate = new Date(year, month, i);
-    const isSelected = currentDate.toDateString() === selectedDate.toDateString();
+    const isSelected = state.selectedDate && currentDate.toDateString() === state.selectedDate.toDateString();
 
     calendarHTML += `
       <div class="day${isSelected ? " selected" : ""}" data-date="${currentDate.toDateString()}">
@@ -43,40 +54,90 @@ const renderCalendar = (month, year) => {
   }
 
   calendarHTML += `</div>`;
-  calendar.innerHTML = calendarHTML;
+  calendarContainer.innerHTML = calendarHTML;
 
-  calendar.addEventListener("click", (event) => {
-    const target = event.target;
+  const favorites = state.getFavorites();
+  const going = state.getGoing();
+  const interested = state.getInterested();
 
-    if (target.classList.contains("prev")) {
-      selectedDate.setMonth(selectedDate.getMonth() - 1);
-      renderCalendar(selectedDate.getMonth(), selectedDate.getFullYear());
-    } else if (target.classList.contains("next")) {
-      selectedDate.setMonth(selectedDate.getMonth() + 1);
-      renderCalendar(selectedDate.getMonth(), selectedDate.getFullYear());
-    }
-  });
+  highlightEventDates(month, year);
 
-  calendar.addEventListener("click", (event) => {
-    const target = event.target;
+  function highlightEventDates(month, year) {
+    const days = calendarContainer.querySelectorAll(".day");
 
-    if (target.classList.contains("day")) {
-      const selectedDayElement = calendar.querySelector(".selected");
+    days.forEach((day) => {
+      const date = day.getAttribute("data-date");
+      const eventsDate = formatDate(new Date(date));
 
-      if (selectedDayElement) {
-        selectedDayElement.classList.remove("selected");
+      let hasFavorite = false;
+      let hasGoing = false;
+      let hasInterested = false;
+
+      if (Array.isArray(favorites)) {
+        favorites.forEach((event) => {
+          if (event.html && event.html.includes(`data-event-date="${eventsDate}"`)) {
+            hasFavorite = true;
+          }
+        });
       }
 
-      target.classList.add("selected");
+      if (Array.isArray(going)) {
+        going.forEach((event) => {
+          if (event.html && event.html.includes(`data-event-date="${eventsDate}"`)) {
+            hasGoing = true;
+          }
+        });
+      }
 
-      const date = target.getAttribute("data-date");
+      if (Array.isArray(interested)) {
+        interested.forEach((event) => {
+          if (event.html && event.html.includes(`data-event-date="${eventsDate}"`)) {
+            hasInterested = true;
+          }
+        });
+      }
+
+      if (hasFavorite) {
+        day.classList.add("favorite");
+      }
+
+      if (hasGoing) {
+        day.classList.add("going");
+      }
+
+      if (hasInterested) {
+        day.classList.add("interested");
+      }
+    });
+  }
+
+  const prevBtn = document.querySelector(".prev");
+  const nextBtn = document.querySelector(".next");
+
+  prevBtn.addEventListener("click", function () {
+    state.selectedDate.setMonth(state.selectedDate.getMonth() - 1);
+    renderCalendar(state.selectedDate.getMonth(), state.selectedDate.getFullYear());
+  });
+
+  nextBtn.addEventListener("click", function () {
+    state.selectedDate.setMonth(state.selectedDate.getMonth() + 1);
+    renderCalendar(state.selectedDate.getMonth(), state.selectedDate.getFullYear());
+  });
+
+  const days = calendarContainer.querySelectorAll(".day");
+
+  days.forEach((day) => {
+    day.addEventListener("click", () => {
+      const date = day.getAttribute("data-date");
 
       if (date) {
-        selectedDate = new Date(date);
+        state.selectedDate = new Date(date);
+        renderCalendar(state.selectedDate.getMonth(), state.selectedDate.getFullYear());
       }
-    }
+    });
   });
-};
+}
+
+renderCalendar(state.selectedDate.getMonth(), state.selectedDate.getFullYear());
 
 export { renderCalendar };
-
