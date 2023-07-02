@@ -41,7 +41,7 @@ a:hover{
   gap: 16px;
   padding: 16px;
   width: 80%;
-  margin: 32px auto;
+  margin: 0px auto;
 }
 
 .event-item {
@@ -112,6 +112,39 @@ a:hover{
   width: 98%;
 }
 
+#calendar {
+  font-family: Arial, sans-serif;
+  width: 100%;
+  display: none;
+}
+
+#calendar .month {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#calendar .month .prev,
+#calendar .month .next {
+  cursor: pointer;
+  font-size: 26px;
+}
+
+#calendar .days {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+#calendar .day-labels {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 5px;
+  width: 98%;
+}
+
 #calendar .day-labels p {
   text-align: center;
   font-weight: bold;
@@ -132,23 +165,11 @@ a:hover{
   border: black solid;
 }
 
-#calendar .day.selected {
-  background-color: #2196f3;
-  color: #fff;
-}
 
 #calendar .day:hover {
   background-color: #e0e0e0;
 }
 
-#calendar .day.favorite {
-  background-color: pink;
-}
-
-#calendar .day.interested {
-  background-color: yellow;
-}
-
-#calendar .day.going {
-  background-color: green;
+.day {
+  padding: 26px;
 }
