@@ -5,4 +5,4 @@ const tabOptions = [
   { name: "Calendar", category: "calendar" }
 ];
 
-export default tabOptions;
+export {tabOptions};

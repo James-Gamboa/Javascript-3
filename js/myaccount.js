@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { renderEvents } from "./render.js";
-import state from "../modules/state.js";
-import tabOptions from "../modules/tabOptions.js";
+import {state} from "../modules/state.js";
+import {tabOptions} from "../modules/tabOptions.js";
 import { renderCalendar } from "../modules/calendar.js";
 
 const today = new Date();

@@ -1,5 +1,5 @@
 // @ts-nocheck
-import state from "../modules/state.js";
+import {state}from "../modules/state.js";
 import { removeFromList } from "./myaccount.js";
 import { getEventsFromCache } from "../modules/eventCache.js";
 

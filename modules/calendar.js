@@ -1,5 +1,5 @@
 // @ts-nocheck
-import state from "./state.js";
+import {state} from "./state.js";
 
 state.selectedDate = new Date();
 

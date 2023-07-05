@@ -2,7 +2,7 @@
 import { getEventsByCategory } from "../modules/api.js";
 import { renderEventsByCategory } from "./render.js";
 import { getEventsFromCache, setEventsInCache } from "../modules/eventCache.js";
-import tabCategories from "../modules/tabCategories.js";
+import {tabCategories} from "../modules/tabCategories.js";
 
 const tabsContainer = document.getElementById("tabs");
 

@@ -6,4 +6,4 @@ const tabCategories = [
   { name: "Art", category: "art" },
 ];
 
-export default tabCategories;
+export  {tabCategories};
