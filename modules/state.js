@@ -5,6 +5,7 @@ const state = {
   going: [],
 
   addToFavorites(event) {
+    event.color = "pink";
     this.favorites.push(event);
     this.saveState();
   },
@@ -19,6 +20,7 @@ const state = {
   },
 
   addToInterested(event) {
+    event.color = "yellow";
     this.interested.push(event);
     this.saveState();
   },
@@ -33,6 +35,7 @@ const state = {
   },
 
   addToGoing(event) {
+    event.color = "green";
     this.going.push(event);
     this.saveState();
   },

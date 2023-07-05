@@ -18,7 +18,7 @@ function renderCalendar(month, year) {
     "July", "August", "September", "October", "November", "December"
   ];
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  const firstDay = new Date(year, month, 1).getDay(); 
+  const firstDay = new Date(year, month, 1).getDay();
   const lastDay = new Date(year, month + 1, 0).getDate();
   const numDays = lastDay;
 
@@ -56,10 +56,6 @@ function renderCalendar(month, year) {
   calendarHTML += `</div>`;
   calendarContainer.innerHTML = calendarHTML;
 
-  const favorites = state.getFavorites();
-  const going = state.getGoing();
-  const interested = state.getInterested();
-
   highlightEventDates(month, year);
 
   function highlightEventDates(month, year) {
@@ -69,44 +65,31 @@ function renderCalendar(month, year) {
       const date = day.getAttribute("data-date");
       const eventsDate = formatDate(new Date(date));
 
-      let hasFavorite = false;
-      let hasGoing = false;
-      let hasInterested = false;
+      let colors = [];
 
-      if (Array.isArray(favorites)) {
-        favorites.forEach((event) => {
-          if (event.html && event.html.includes(`data-event-date="${eventsDate}"`)) {
-            hasFavorite = true;
-          }
-        });
+      if (Array.isArray(state.going)) {
+        const goingEvents = state.going.filter((event) => event.html && event.html.includes(`data-event-date="${eventsDate}"`));
+        if (goingEvents.length > 0) {
+          colors.push("green");
+        }
       }
 
-      if (Array.isArray(going)) {
-        going.forEach((event) => {
-          if (event.html && event.html.includes(`data-event-date="${eventsDate}"`)) {
-            hasGoing = true;
-          }
-        });
+      if (Array.isArray(state.interested)) {
+        const interestedEvents = state.interested.filter((event) => event.html && event.html.includes(`data-event-date="${eventsDate}"`));
+        if (interestedEvents.length > 0 && colors.length === 0) {
+          colors.push("yellow");
+        }
       }
 
-      if (Array.isArray(interested)) {
-        interested.forEach((event) => {
-          if (event.html && event.html.includes(`data-event-date="${eventsDate}"`)) {
-            hasInterested = true;
-          }
-        });
+      if (Array.isArray(state.favorites)) {
+        const favoriteEvents = state.favorites.filter((event) => event.html && event.html.includes(`data-event-date="${eventsDate}"`));
+        if (favoriteEvents.length > 0 && colors.length === 0) {
+          colors.push("pink");
+        }
       }
 
-      if (hasFavorite) {
-        day.classList.add("favorite");
-      }
-
-      if (hasGoing) {
-        day.classList.add("going");
-      }
-
-      if (hasInterested) {
-        day.classList.add("interested");
+      if (colors.length > 0) {
+        day.classList.add(...colors);
       }
     });
   }
@@ -138,4 +121,21 @@ function renderCalendar(month, year) {
   });
 }
 
-export { renderCalendar };
+const updateEventColor = (event, color) => {
+  const eventElement = document.getElementById(event.id);
+
+  if (eventElement) {
+    eventElement.style.backgroundColor = color;
+  }
+
+  const date = formatDate(new Date(event.date));
+  const dayElement = calendarContainer.querySelector(`.day[data-date="${date}"]`);
+  if (dayElement) {
+    dayElement.classList.remove(event.color);
+    dayElement.classList.add(color);
+  }
+
+  event.color = color;
+};
+
+export { renderCalendar, updateEventColor };

@@ -46,6 +46,7 @@ const removeFromList = (event, tab) => {
   }
 
   renderEventsByTab(tab);
+  updateEventColor(event, "");
 };
 
 const updateEventList = () => {

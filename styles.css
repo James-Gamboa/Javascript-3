@@ -173,3 +173,18 @@ a:hover{
 .day {
   padding: 26px;
 }
+
+/* Estilo para los días con eventos favoritos */
+.day.favorite {
+  background-color: pink;
+}
+
+/* Estilo para los días con eventos a los que se va a asistir */
+.day.going {
+  background-color: green;
+}
+
+/* Estilo para los días con eventos de interés */
+.day.interested {
+  background-color: yellow;
+}
