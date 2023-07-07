@@ -1,5 +1,6 @@
 // @ts-nocheck
 import { state } from "./state.js";
+import { renderDayEvents,getEventsByDate, getEventColor} from "./eventsCalendar.js";
 
 state.selectedDate = new Date();
 
@@ -77,38 +78,6 @@ function renderCalendar(month, year) {
       }
     });
   });
-}
-
-function getEventsByDate(date) {
-  const events = state.favorites.concat(state.interested, state.going);
-  return events.filter((event) => {
-    const eventDate = new Date(event.date);
-    return eventDate.toDateString() === date.toDateString();
-  });
-}
-
-function getEventColor(events) {
-  let color = "";
-  if (events.length > 0) {
-    if (events.some((event) => state.going.includes(event))) {
-      color = "green";
-    } else if (events.some((event) => state.interested.includes(event))) {
-      color = "yellow";
-    } else {
-      color = "pink";
-    }
-  }
-  return color;
-}
-
-function renderDayEvents(events, color) {
-  let eventsHTML = "";
-  events.forEach((event) => {
-    eventsHTML += `
-      <p class="event" style="background-color: ${color};">${event.title}</p>
-    `;
-  });
-  return eventsHTML;
 }
 
 export { renderCalendar };

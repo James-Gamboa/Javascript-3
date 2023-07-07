@@ -63,4 +63,4 @@ const state = {
 
 state.loadState();
 
-export {state};
+export { state };

@@ -173,18 +173,3 @@ a:hover{
 .day {
   padding: 26px;
 }
-
-
-.day.favorite {
-  background-color: pink;
-}
-
-
-.day.going {
-  background-color: green;
-}
-
-
-.day.interested {
-  background-color: yellow;
-}
