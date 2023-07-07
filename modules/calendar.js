@@ -1,16 +1,9 @@
 // @ts-nocheck
-import {state} from "./state.js";
+import { state } from "./state.js";
 
 state.selectedDate = new Date();
 
 const calendarContainer = document.getElementById("calendar");
-
-function formatDate(date) {
-  const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, "0");
-  const day = date.getDate().toString().padStart(2, "0");
-  return `${year}-${month}-${day}`;
-}
 
 function renderCalendar(month, year) {
   const months = [
@@ -46,53 +39,19 @@ function renderCalendar(month, year) {
     const currentDate = new Date(year, month, i);
     const isSelected = state.selectedDate && currentDate.toDateString() === state.selectedDate.toDateString();
 
+    const dayEvents = getEventsByDate(currentDate);
+    const eventColor = getEventColor(dayEvents);
+
     calendarHTML += `
       <div class="day${isSelected ? " selected" : ""}" data-date="${currentDate.toDateString()}">
         <p class="day-number">${i}</p>
+        ${renderDayEvents(dayEvents, eventColor)}
       </div>
     `;
   }
 
   calendarHTML += `</div>`;
   calendarContainer.innerHTML = calendarHTML;
-
-  highlightEventDates(month, year);
-
-  function highlightEventDates(month, year) {
-    const days = calendarContainer.querySelectorAll(".day");
-
-    days.forEach((day) => {
-      const date = day.getAttribute("data-date");
-      const eventsDate = formatDate(new Date(date));
-
-      let colors = [];
-
-      if (Array.isArray(state.going)) {
-        const goingEvents = state.going.filter((event) => event.html && event.html.includes(`data-event-date="${eventsDate}"`));
-        if (goingEvents.length > 0) {
-          colors.push("green");
-        }
-      }
-
-      if (Array.isArray(state.interested)) {
-        const interestedEvents = state.interested.filter((event) => event.html && event.html.includes(`data-event-date="${eventsDate}"`));
-        if (interestedEvents.length > 0 && colors.length === 0) {
-          colors.push("yellow");
-        }
-      }
-
-      if (Array.isArray(state.favorites)) {
-        const favoriteEvents = state.favorites.filter((event) => event.html && event.html.includes(`data-event-date="${eventsDate}"`));
-        if (favoriteEvents.length > 0 && colors.length === 0) {
-          colors.push("pink");
-        }
-      }
-
-      if (colors.length > 0) {
-        day.classList.add(...colors);
-      }
-    });
-  }
 
   const prevBtn = document.querySelector(".prev");
   const nextBtn = document.querySelector(".next");
@@ -112,7 +71,6 @@ function renderCalendar(month, year) {
   days.forEach((day) => {
     day.addEventListener("click", () => {
       const date = day.getAttribute("data-date");
-
       if (date) {
         state.selectedDate = new Date(date);
         renderCalendar(state.selectedDate.getMonth(), state.selectedDate.getFullYear());
@@ -121,21 +79,36 @@ function renderCalendar(month, year) {
   });
 }
 
-const updateEventColor = (event, color) => {
-  const eventElement = document.getElementById(event.id);
+function getEventsByDate(date) {
+  const events = state.favorites.concat(state.interested, state.going);
+  return events.filter((event) => {
+    const eventDate = new Date(event.date);
+    return eventDate.toDateString() === date.toDateString();
+  });
+}
 
-  if (eventElement) {
-    eventElement.style.backgroundColor = color;
+function getEventColor(events) {
+  let color = "";
+  if (events.length > 0) {
+    if (events.some((event) => state.going.includes(event))) {
+      color = "green";
+    } else if (events.some((event) => state.interested.includes(event))) {
+      color = "yellow";
+    } else {
+      color = "pink";
+    }
   }
+  return color;
+}
 
-  const date = formatDate(new Date(event.date));
-  const dayElement = calendarContainer.querySelector(`.day[data-date="${date}"]`);
-  if (dayElement) {
-    dayElement.classList.remove(event.color);
-    dayElement.classList.add(color);
-  }
+function renderDayEvents(events, color) {
+  let eventsHTML = "";
+  events.forEach((event) => {
+    eventsHTML += `
+      <p class="event" style="background-color: ${color};">${event.title}</p>
+    `;
+  });
+  return eventsHTML;
+}
 
-  event.color = color;
-};
-
-export { renderCalendar, updateEventColor };
+export { renderCalendar };
