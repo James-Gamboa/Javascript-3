@@ -1,5 +1,5 @@
 // @ts-nocheck
-import {state}from "../modules/state.js";
+import { state } from "../modules/state.js";
 import { removeFromList } from "./myaccount.js";
 import { getEventsFromCache } from "../modules/eventCache.js";
 
@@ -54,11 +54,11 @@ export default function renderEventsWithActions(event, tab, showRemoveButton, up
     const favoritesButton = document.createElement("button");
     favoritesButton.innerHTML = '<i class="far fa-heart"></i>';
     favoritesButton.addEventListener("click", () => {
-      if (state.getFavorites().includes(event)) {
-        state.removeFromFavorites(event);
+      if (state.getList("favorites").includes(event)) {
+        state.removeFromList(event, "favorites");
         favoritesButton.innerHTML = '<i class="far fa-heart"></i>';
       } else {
-        state.addToFavorites(event);
+        state.addToList(event, "favorites");
         favoritesButton.innerHTML = '<i class="fas fa-heart"></i>';
       }
     });
@@ -67,11 +67,11 @@ export default function renderEventsWithActions(event, tab, showRemoveButton, up
     const interestedButton = document.createElement("button");
     interestedButton.innerText = "Interested";
     interestedButton.addEventListener("click", () => {
-      if (state.getInterested().includes(event)) {
-        state.removeFromInterested(event);
+      if (state.getList("interested").includes(event)) {
+        state.removeFromList(event, "interested");
         interestedButton.innerText = "Interested";
       } else {
-        state.addToInterested(event);
+        state.addToList(event, "interested");
         interestedButton.innerText = "Not Going";
       }
     });
@@ -80,12 +80,12 @@ export default function renderEventsWithActions(event, tab, showRemoveButton, up
     const goingButton = document.createElement("button");
     goingButton.innerText = "Going!";
     goingButton.addEventListener("click", () => {
-      if (state.getGoing().includes(event)) {
-        state.removeFromGoing(event);
+      if (state.getList("going").includes(event)) {
+        state.removeFromList(event, "going");
         goingButton.innerText = "Going!";
       } else {
-        state.addToGoing(event);
-        state.removeFromInterested(event);
+        state.addToList(event, "going");
+        state.removeFromList(event, "interested");
         goingButton.innerText = "Not Interested";
       }
     });
@@ -99,7 +99,7 @@ export const renderEvents = (events, tab, showRemoveButton = false, updateEventL
   const eventsCategory = document.getElementById("events");
   eventsCategory.innerHTML = "";
 
-  if (events.length === 0) {
+  if (events.length === 0 && tab !== "calendar") {
     const message = document.createElement("p");
     message.innerText = `There are no events in your ${tab}`;
     eventsCategory.appendChild(message);

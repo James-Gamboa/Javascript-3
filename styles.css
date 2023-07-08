@@ -80,40 +80,6 @@ a:hover{
 }
 
 #calendar {
-  font-family: Arial, sans-serif;
-  width: 100%;
-  display: none;
-}
-
-#calendar .month {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-#calendar .month .prev,
-#calendar .month .next {
-  cursor: pointer;
-  font-size: 26px;
-}
-
-#calendar .days {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-top: 10px;
-}
-
-#calendar .day-labels {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 5px;
-  width: 98%;
-}
-
-#calendar {
-  font-family: Arial, sans-serif;
   width: 100%;
   display: none;
 }

@@ -1,8 +1,8 @@
 // @ts-nocheck
-import { state } from "./state.js";
+import { state } from "../modules/state.js";
 
 function getEventsByDate(date) {
-  const events = state.favorites.concat(state.interested, state.going);
+  const events = state.getList("favorites").concat(state.getList("interested"), state.getList("going"));
   const uniqueEvents = [];
   const eventIds = new Set();
 
@@ -19,13 +19,12 @@ function getEventsByDate(date) {
   return uniqueEvents;
 }
 
-
 function getEventColor(events) {
   let color = "";
   if (events.length > 0) {
-    if (events.some((event) => state.going.includes(event))) {
+    if (events.some((event) => state.getList("going").includes(event))) {
       color = "green";
-    } else if (events.some((event) => state.interested.includes(event))) {
+    } else if (events.some((event) => state.getList("interested").includes(event))) {
       color = "yellow";
     } else {
       color = "pink";

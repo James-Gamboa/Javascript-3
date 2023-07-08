@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { renderEvents } from "./render.js";
-import {state} from "../modules/state.js";
-import {tabOptions} from "../modules/tabOptions.js";
+import { state } from "../modules/state.js";
+import { tabOptions } from "../modules/tabOptions.js";
 import { renderCalendar } from "../modules/calendar.js";
 
 const today = new Date();
@@ -18,35 +18,12 @@ const renderTabsOption = () => {
 };
 
 const getEventsByTab = (tab) => {
-  switch (tab) {
-    case "favorites":
-      return state.getFavorites();
-    case "interested":
-      return state.getInterested();
-    case "going":
-      return state.getGoing();
-    default:
-      return [];
-  }
+  return state.getList(tab);
 };
 
 const removeFromList = (event, tab) => {
-  switch (tab) {
-    case "favorites":
-      state.removeFromFavorites(event);
-      break;
-    case "interested":
-      state.removeFromInterested(event);
-      break;
-    case "going":
-      state.removeFromGoing(event);
-      break;
-    default:
-      break;
-  }
-
+  state.removeFromList(event, tab);
   renderEventsByTab(tab);
-  updateEventColor(event, "");
 };
 
 const updateEventList = () => {
@@ -59,8 +36,11 @@ const updateEventList = () => {
 
 const renderEventsByTab = (tab) => {
   const events = getEventsByTab(tab);
-  renderEvents(events, tab, true, removeFromList, updateEventList);
+  if (Array.isArray(events)) {
+    renderEvents(events, tab, true, removeFromList, updateEventList);
+  }
 };
+
 
 tabsContainer.addEventListener("click", (event) => {
   const tab = event.target.getAttribute("data-tab");
@@ -78,11 +58,13 @@ tabsContainer.addEventListener("click", (event) => {
   const tab = event.target.getAttribute("data-tab");
   if (tab === "calendar") {
     calendarContainer.style.display = "block";
+    renderEvents([], tab);
     renderCalendar(today.getMonth(), today.getFullYear());
   } else {
     calendarContainer.style.display = "none";
   }
 });
+
 
 renderTabsOption();
 
