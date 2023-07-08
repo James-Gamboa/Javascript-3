@@ -9,11 +9,18 @@ const tabsContainer = document.getElementById("tabs");
 const calendarContainer = document.getElementById("calendar");
 
 const renderTabsOption = () => {
+  const homeTab = document.createElement("li");
+  homeTab.textContent = "Home";
+  homeTab.setAttribute("data-tab", "home");
+  tabsContainer.appendChild(homeTab);
+
   tabOptions.forEach((tabOption) => {
-    const tab = document.createElement("li");
-    tab.textContent = tabOption.name;
-    tab.setAttribute("data-tab", tabOption.category);
-    tabsContainer.appendChild(tab);
+    if (tabOption.category !== "home") {
+      const tab = document.createElement("li");
+      tab.textContent = tabOption.name;
+      tab.setAttribute("data-tab", tabOption.category);
+      tabsContainer.appendChild(tab);
+    }
   });
 };
 
@@ -44,6 +51,11 @@ const renderEventsByTab = (tab) => {
 tabsContainer.addEventListener("click", (event) => {
   const tab = event.target.getAttribute("data-tab");
   if (tab) {
+    if (tab === "home") {
+      window.location.href = "index.html";
+      return;
+    }
+
     const activeTab = document.querySelector(".tabs li.active");
     if (activeTab) {
       activeTab.classList.remove("active");

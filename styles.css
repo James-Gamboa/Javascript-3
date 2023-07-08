@@ -1,14 +1,6 @@
 body {
   margin: 0px;
-}
-
-a {
-  color: white;
-  text-decoration: none;
-}
-
-a:hover{
-  color: black ;
+  font-family: "Bebas Neue", sans-serif;
 }
 
 .tabs {
@@ -28,10 +20,22 @@ a:hover{
   padding: 30px;
   cursor: pointer;
 }
-.tabs li:hover{
+
+.tabs li:hover,
+.tabs li:hover a {
   background: white;
-  color: black ;
+  color: black;
 }
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  color: black;
+}
+
 
 .flex-container {
   display: flex;
