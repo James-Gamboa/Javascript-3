@@ -41,7 +41,6 @@ const renderEventsByTab = (tab) => {
   }
 };
 
-
 tabsContainer.addEventListener("click", (event) => {
   const tab = event.target.getAttribute("data-tab");
   if (tab) {
@@ -57,14 +56,17 @@ tabsContainer.addEventListener("click", (event) => {
 tabsContainer.addEventListener("click", (event) => {
   const tab = event.target.getAttribute("data-tab");
   if (tab === "calendar") {
-    calendarContainer.style.display = "block";
-    renderEvents([], tab);
-    renderCalendar(today.getMonth(), today.getFullYear());
+    if (calendarContainer) {
+      calendarContainer.style.display = "block";
+      renderEvents([], tab);
+      renderCalendar(today.getMonth(), today.getFullYear());
+    }
   } else {
-    calendarContainer.style.display = "none";
+    if (calendarContainer) {
+      calendarContainer.style.display = "none";
+    }
   }
 });
-
 
 renderTabsOption();
 
