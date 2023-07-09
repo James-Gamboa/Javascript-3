@@ -17,7 +17,6 @@ const state = {
       this.saveState();
     }
   },
-  
 
   getList(list) {
     return this.lists[list];
