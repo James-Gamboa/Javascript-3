@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { state } from "./state.js";
 import { renderDayEvents,getEventsByDate, getEventColor} from "./eventsCalendar.js";
+import { renderEventCard } from "../js/render.js";
 
 state.selectedDate = new Date();
 
@@ -69,15 +70,28 @@ function renderCalendar(month, year) {
 
   const days = calendarContainer.querySelectorAll(".day");
 
+
   days.forEach((day) => {
     day.addEventListener("click", () => {
       const date = day.getAttribute("data-date");
       if (date) {
         state.selectedDate = new Date(date);
         renderCalendar(state.selectedDate.getMonth(), state.selectedDate.getFullYear());
+  
+        const dayEvents = getEventsByDate(state.selectedDate);
+        if (dayEvents.length > 0) {
+          const eventCard = renderEventCard(dayEvents[0]);
+          const overlay = document.createElement("div");
+          overlay.classList.add("overlay");
+          overlay.appendChild(eventCard);
+          document.body.appendChild(overlay);
+  
+          overlay.addEventListener("click", () => {
+            overlay.remove();
+          });
+        }
       }
     });
   });
 }
-
 export { renderCalendar };

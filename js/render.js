@@ -111,6 +111,18 @@ export const renderEvents = (events, tab, showRemoveButton = false, updateEventL
   }
 };
 
+export const renderEventCard = (event) => {
+  const eventCard = renderEventsWithActions(event, "event-card", false, null);
+
+  const buttons = eventCard.querySelectorAll("button");
+  buttons.forEach((button) => button.remove());
+
+  eventCard.classList.remove("event-item");
+  eventCard.classList.add("event-card");
+  return eventCard;
+};
+
+
 export const renderEventsByCategory = async (category) => {
   const events = await getEventsFromCache(category);
   renderEvents(events, category);
