@@ -2,7 +2,7 @@ import { state } from "../modules/state.js";
 import { removeFromList } from "./myaccount.js";
 import { getEventsFromCache } from "../modules/eventCache.js";
 
-export default function renderEventsWithActions(event, tab, showRemoveButton, updateEventList) {
+export function renderEventsWithActions(event, tab, showRemoveButton, updateEventList) {
   const eventItem = document.createElement("div");
   eventItem.classList.add("event-item");
   eventItem.setAttribute("data-event-id", event.id);
