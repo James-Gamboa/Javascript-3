@@ -26,23 +26,22 @@ npm run build
 
 Para verificar si hay errores y advertencias en el código utilizando ESLint, ejecuta el siguiente comando:
 
-Si deseas corregir automáticamente los problemas detectados por ESLint, ejecuta el siguiente comando:
-
 ```
 npm run lint
 ```
-
-Además, puedes utilizar Prettier para formatear automáticamente tu código ejecutando el siguiente comando:
+Si deseas corregir automáticamente los problemas detectados por ESLint, ejecuta el siguiente comando:
 
 ```
 npm run lint:fix
 ```
 
-Recuerda ejecutar estos comandos regularmente para mantener un código limpio y siguiendo las mejores prácticas.
+Además, puedes utilizar Prettier para formatear automáticamente tu código ejecutando el siguiente comando:
 
 ```
 npm run format
 ```
+
+Recuerda ejecutar estos comandos regularmente para mantener un código limpio y siguiendo las mejores prácticas.
 
 ### Como compilar de forma local:
 
