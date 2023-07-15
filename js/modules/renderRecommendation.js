@@ -5,20 +5,22 @@ import {
   getExtraImageName,
 } from "../utils/imageUtils.js";
 
+import { getRealPlantName } from "../utils/getNamePlantsUtils.js";
+
 function renderRecommendation(plant) {
   const recommendationContainer = document.getElementById("recommendation");
   recommendationContainer.innerHTML = "";
 
   const title = document.createElement("h2");
-  title.textContent = plant.name;
+  title.textContent = getRealPlantName(plant.name);
   recommendationContainer.appendChild(title);
 
   const imageContainer = document.createElement("div");
   imageContainer.classList.add("image-container");
 
   const plantImage = document.createElement("img");
-  plantImage.src = `img/${getPlantImageName(plant.name)}.png`; 
-  plantImage.alt = plant.name; 
+  plantImage.src = `img/${getPlantImageName(plant.name)}.png`;
+  plantImage.alt = getRealPlantName(plant.name);
   imageContainer.appendChild(plantImage);
 
   if (plant.extras.length > 0) {
@@ -29,12 +31,12 @@ function renderRecommendation(plant) {
       imageContainer.appendChild(extraImage);
     }
   }
-  
+
   if (plant.potStyle) {
     const potImage = document.createElement("img");
     potImage.src = `img/${getPotImageName(
       plant.potMaterial,
-      plant.potStyle
+      plant.potStyle,
     )}.png`;
     potImage.alt = `${plant.potMaterial} pot`;
     imageContainer.appendChild(potImage);
@@ -46,7 +48,7 @@ function renderRecommendation(plant) {
   information.classList.add("information");
 
   const plantInfo = document.createElement("p");
-  plantInfo.textContent = `Name: ${plant.name}`;
+  plantInfo.textContent = `Name: ${getRealPlantName(plant.name)}`;
   information.appendChild(plantInfo);
 
   const soilInfo = document.createElement("p");

@@ -40,7 +40,7 @@ class PlantBuilder {
     this.properties.extras = extras;
     return this;
   }
-  
+
   withPlantImage(plantImage) {
     this.properties.plantImage = plantImage;
     return this;

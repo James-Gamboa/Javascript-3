@@ -29,6 +29,7 @@ Para verificar si hay errores y advertencias en el código utilizando ESLint, ej
 ```
 npm run lint
 ```
+
 Si deseas corregir automáticamente los problemas detectados por ESLint, ejecuta el siguiente comando:
 
 ```

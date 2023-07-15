@@ -8,7 +8,9 @@ document
   .addEventListener("submit", function (event) {
     event.preventDefault();
     const plant = getPlantRecommendation();
-    renderRecommendation(plant);
+    if (plant) {
+      renderRecommendation(plant);
+    }
   });
 
 document.getElementById("clearBtn").addEventListener("click", clearForm);
