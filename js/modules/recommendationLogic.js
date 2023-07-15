@@ -44,10 +44,10 @@ function getPlantRecommendation() {
 
   switch (pets.value) {
     case "yes":
-      plantBuilder.withName("Non-Toxic Plant");
+      plantBuilder.withPotMaterial("Non-Toxic Plant");
       break;
     case "no":
-      plantBuilder.withName("Toxic Plant");
+      plantBuilder.withPotMaterial("Toxic Plant");
       break;
   }
 
@@ -57,7 +57,7 @@ function getPlantRecommendation() {
         .withPotMaterial("Clay")
         .withSoil("Drainage Soil")
         .withPlantImage(
-          getPlantImageName(getRealPlantName(plantBuilder.getName())),
+          getPlantImageName(getRealPlantName(plantBuilder.properties.name)),
         );
       break;
     case "underwater":
