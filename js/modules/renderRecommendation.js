@@ -1,11 +1,10 @@
 // @ts-nocheck
+import { getRealPlantName } from "../utils/getNamePlantsUtils.js";
 import {
   getPlantImageName,
   getPotImageName,
   getExtraImageName,
 } from "../utils/imageUtils.js";
-
-import { getRealPlantName } from "../utils/getNamePlantsUtils.js";
 
 function renderRecommendation(plant) {
   const recommendationContainer = document.getElementById("recommendation");

@@ -1,7 +1,6 @@
 // @ts-nocheck
 import { PlantBuilder } from "../modules/plantBuilder.js";
 import { getPlantImageName, getExtraImageName } from "../utils/imageUtils.js";
-import { getRealPlantName } from "../utils/getNamePlantsUtils.js";
 
 function getPlantRecommendation() {
   const form = document.getElementById("plantForm");
@@ -20,16 +19,41 @@ function getPlantRecommendation() {
   }
 
   let plantBuilder = new PlantBuilder();
+  let plantName;
 
   switch (placement.value) {
     case "inside-indirect":
-      plantBuilder.withName("Low Light Plant");
+      plantBuilder.withName("Low Light Plants");
       break;
     case "inside-lot-indirect":
-      plantBuilder.withName("Medium Light Plant");
+      plantBuilder.withName("Medium Light Plants");
       break;
     case "outside":
-      plantBuilder.withName("Outdoor Plant");
+      plantBuilder.withName("Outdoor Plants");
+      break;
+  }
+
+  switch (plantBuilder.properties.name) {
+    case "Low Light Plants":
+      if (watering.value === "overwater") {
+        plantName = "Toxic Plant (Low Light)";
+      } else {
+        plantName = "Non-Toxic Plant (Low Light)";
+      }
+      break;
+    case "Medium Light Plants":
+      if (watering.value === "overwater") {
+        plantName = "Toxic Plant (Medium Light)";
+      } else {
+        plantName = "Non-Toxic Plant (Medium Light)";
+      }
+      break;
+    case "Outdoor Plants":
+      if (pets.value === "no") {
+        plantName = "Toxic Plant (Outdoor)";
+      } else {
+        plantName = "Non-Toxic Plant (Outdoor)";
+      }
       break;
   }
 
@@ -53,12 +77,15 @@ function getPlantRecommendation() {
 
   switch (watering.value) {
     case "overwater":
+      if (plantName.includes("Toxic")) {
+        plantName += " (Low Light)";
+      } else {
+        plantName += " (Medium Light)";
+      }
       plantBuilder
         .withPotMaterial("Clay")
         .withSoil("Drainage Soil")
-        .withPlantImage(
-          getPlantImageName(getRealPlantName(plantBuilder.properties.name)),
-        );
+        .withPlantImage(getPlantImageName(plantName));
       break;
     case "underwater":
     case "neither":

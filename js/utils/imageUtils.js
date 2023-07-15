@@ -1,15 +1,25 @@
 function getPlantImageName(plantName) {
   switch (plantName) {
-    case "Low Light Plant":
+    case "Low Light Plants":
       return "plant-sansevieria";
-    case "Medium Light Plant":
+    case "Medium Light Plants":
       return "plant-aglaonema";
-    case "Outdoor Plant":
+    case "Outdoor Plants":
       return "plant-aloe";
-    case "Non-Toxic Plant":
+    case "Non-Toxic Plant (Low Light)":
       return "plant-fern";
-    case "Toxic Plant":
+    case "Toxic Plant (Low Light)":
       return "plant-peace-lily";
+    case "Non-Toxic Plant (Medium Light)":
+      return "plant-monstera";
+    case "Toxic Plant (Medium Light)":
+      return "plant-peace-lily";
+    case "Non-Toxic Plant (Outdoor)":
+      return "plant-cactus";
+    case "Toxic Plant (Outdoor)":
+      return "plant-aloe";
+    default:
+      return "";
   }
 }
 
