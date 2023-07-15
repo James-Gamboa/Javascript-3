@@ -17,19 +17,9 @@ function renderRecommendation(plant) {
   imageContainer.classList.add("image-container");
 
   const plantImage = document.createElement("img");
-  plantImage.src = `img/${getPlantImageName(plant.name)}.png`;
-  plantImage.alt = plant.name;
+  plantImage.src = `img/${getPlantImageName(plant.name)}.png`; 
+  plantImage.alt = plant.name; 
   imageContainer.appendChild(plantImage);
-
-  if (plant.potStyle) {
-    const potImage = document.createElement("img");
-    potImage.src = `img/${getPotImageName(
-      plant.potMaterial,
-      plant.potStyle,
-    )}.png`;
-    potImage.alt = `${plant.potMaterial} pot`;
-    imageContainer.appendChild(potImage);
-  }
 
   if (plant.extras.length > 0) {
     for (const extra of plant.extras) {
@@ -38,6 +28,16 @@ function renderRecommendation(plant) {
       extraImage.alt = extra;
       imageContainer.appendChild(extraImage);
     }
+  }
+  
+  if (plant.potStyle) {
+    const potImage = document.createElement("img");
+    potImage.src = `img/${getPotImageName(
+      plant.potMaterial,
+      plant.potStyle
+    )}.png`;
+    potImage.alt = `${plant.potMaterial} pot`;
+    imageContainer.appendChild(potImage);
   }
 
   recommendationContainer.appendChild(imageContainer);
@@ -54,14 +54,14 @@ function renderRecommendation(plant) {
   information.appendChild(soilInfo);
 
   const potInfo = document.createElement("p");
-  potInfo.textContent = `Pot: ${plant.pot}`;
+  potInfo.textContent = `Pot Material: ${plant.potMaterial}`;
   information.appendChild(potInfo);
 
   const colorInfo = document.createElement("p");
-  colorInfo.textContent = `Color: ${plant.color}`;
+  colorInfo.textContent = `Pot Color: ${plant.potColor}`;
   information.appendChild(colorInfo);
 
-  if (plant.extras.length > 0) {
+  if (plant.extras.length > 0) { // Utiliza plant.extras en lugar de plant.properties.extras
     const extrasInfo = document.createElement("p");
     extrasInfo.textContent = `Extras: ${plant.extras.join(", ")}`;
     information.appendChild(extrasInfo);

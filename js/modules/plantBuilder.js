@@ -1,51 +1,53 @@
 class PlantBuilder {
   constructor() {
-    this.name = "";
-    this.soil = "";
-    this.potMaterial = "";
-    this.potStyle = "";
-    this.potColor = "";
-    this.extras = [];
+    this.properties = {
+      name: "",
+      soil: "",
+      potMaterial: "",
+      potStyle: "",
+      potColor: "",
+      extras: [],
+      plantImage: "",
+    };
   }
 
   withName(name) {
-    this.name = name;
+    this.properties.name = name;
     return this;
   }
 
   withSoil(soil) {
-    this.soil = soil;
+    this.properties.soil = soil;
     return this;
   }
 
   withPotMaterial(material) {
-    this.potMaterial = material;
+    this.properties.potMaterial = material;
     return this;
   }
 
   withPotStyle(style) {
-    this.potStyle = style;
+    this.properties.potStyle = style;
     return this;
   }
 
   withPotColor(color) {
-    this.potColor = color;
+    this.properties.potColor = color;
     return this;
   }
 
   withExtras(extras) {
-    this.extras = extras;
+    this.properties.extras = extras;
+    return this;
+  }
+  
+  withPlantImage(plantImage) {
+    this.properties.plantImage = plantImage;
     return this;
   }
 
   build() {
-    return {
-      name: this.name,
-      soil: this.soil,
-      pot: `${this.potMaterial} pot${this.potStyle ? " " + this.potStyle : ""}`,
-      color: this.potColor,
-      extras: this.extras,
-    };
+    return this.properties;
   }
 }
 
