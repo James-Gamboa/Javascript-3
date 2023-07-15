@@ -61,7 +61,7 @@ function renderRecommendation(plant) {
   colorInfo.textContent = `Pot Color: ${plant.potColor}`;
   information.appendChild(colorInfo);
 
-  if (plant.extras.length > 0) { // Utiliza plant.extras en lugar de plant.properties.extras
+  if (plant.extras.length > 0) {
     const extrasInfo = document.createElement("p");
     extrasInfo.textContent = `Extras: ${plant.extras.join(", ")}`;
     information.appendChild(extrasInfo);
