@@ -18,14 +18,14 @@ function renderRecommendation(plant) {
   imageContainer.classList.add("image-container");
 
   const plantImage = document.createElement("img");
-  plantImage.src = `img/${getPlantImageName(plant.name)}.png`;
+  plantImage.src = `Assets/${getPlantImageName(plant.name)}.png`;
   plantImage.alt = getRealPlantName(plant.name);
   imageContainer.appendChild(plantImage);
 
   if (plant.extras.length > 0) {
     for (const extra of plant.extras) {
       const extraImage = document.createElement("img");
-      extraImage.src = `img/${getExtraImageName(extra)}.png`;
+      extraImage.src = `Assets/${getExtraImageName(extra)}.png`;
       extraImage.alt = extra;
       imageContainer.appendChild(extraImage);
     }
@@ -33,11 +33,11 @@ function renderRecommendation(plant) {
 
   if (plant.potStyle) {
     const potImage = document.createElement("img");
-    potImage.src = `img/${getPotImageName(
+    potImage.src = `Assets/${getPotImageName(
       plant.potMaterial,
-      plant.potStyle,
+      plant.potStyle
     )}.png`;
-    potImage.alt = `${plant.potMaterial} pot`;
+    potImage.alt = `${plant.potMaterial}`;
     imageContainer.appendChild(potImage);
   }
 
