@@ -6,8 +6,9 @@ import {
   getExtraImageName,
 } from "../utils/imageUtils.js";
 
-function renderRecommendation(plant) {
-  const recommendationContainer = document.getElementById("recommendation");
+function renderRecommendation(plant, container) {
+  const recommendationContainer =
+    container || document.getElementById("recommendation");
   recommendationContainer.innerHTML = "";
 
   const title = document.createElement("h2");
@@ -69,6 +70,11 @@ function renderRecommendation(plant) {
   }
 
   recommendationContainer.appendChild(information);
+
+  const customizeBtn = document.createElement("button");
+  customizeBtn.id = "customizeBtn";
+  customizeBtn.textContent = "Customize";
+  recommendationContainer.appendChild(customizeBtn);
 }
 
 export { renderRecommendation };

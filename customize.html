@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customize Your Plant</title>
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body>
+    <h1>Customize Your Plant</h1>
+    <form id="customizeForm">
+      <fieldset>
+        <legend>Choose your pot:</legend>
+        <label>
+          <input type="radio" name="potMaterial" value="clay" /> Clay
+        </label>
+        <label>
+          <input type="radio" name="potMaterial" value="ceramic" /> Ceramic
+        </label>
+      </fieldset>
+      <fieldset>
+        <legend>Pot decorations:</legend>
+        <label>
+          <input type="checkbox" name="potDecorations" value="yes" /> Yes
+        </label>
+        <label>
+          <input type="checkbox" name="potDecorations" value="no" /> No
+        </label>
+      </fieldset>
+      <fieldset>
+        <legend>Pot color:</legend>
+        <label>
+          <input type="radio" name="potColor" value="no" checked /> No
+        </label>
+        <label> <input type="radio" name="potColor" value="yes" /> Yes </label>
+        <div id="colorOptions" style="display: none">
+          <label>
+            <input type="radio" name="colorOption" value="blue" /> Blue
+          </label>
+          <label>
+            <input type="radio" name="colorOption" value="pink" /> Pink
+          </label>
+          <label>
+            <input type="radio" name="colorOption" value="green" /> Green
+          </label>
+          <label>
+            <input type="radio" name="colorOption" value="purple" /> Purple
+          </label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Choose your plant:</legend>
+        <select name="plantName">
+          <option value="aglaonema">Aglaonema Silver Bay</option>
+          <option value="aloe">Aloe Vera</option>
+          <option value="fern">Boston Fern</option>
+          <option value="cactus">Cactus</option>
+          <option value="monstera">Monstera Deliciosa</option>
+          <option value="peace-lily">Peace Lily</option>
+          <option value="sansevieria">Sansevieria</option>
+        </select>
+      </fieldset>
+      <fieldset>
+        <legend>Choose your soil:</legend>
+        <label>
+          <input type="radio" name="soil" value="Drainage Soil" /> Drainage Soil
+        </label>
+        <label>
+          <input type="radio" name="soil" value="Composted Soil" /> Composted
+          Soil
+        </label>
+        <label>
+          <input type="radio" name="soil" value="Fertilized Soil" /> Fertilized
+          Soil
+        </label>
+      </fieldset>
+      <fieldset>
+        <legend>Choose your extras:</legend>
+        <label>
+          <input type="checkbox" name="extras" value="moss-pole" /> Moss pole
+        </label>
+        <label>
+          <input type="checkbox" name="extras" value="pebbles" /> Pebbles
+        </label>
+        <label>
+          <input type="checkbox" name="extras" value="mini-plants" /> Smaller
+          plants
+        </label>
+      </fieldset>
+    </form>
+    <div id="recommendation" class="information"></div>
+    <script type="module" src="./js/customize.js"></script>
+  </body>
+</html>
