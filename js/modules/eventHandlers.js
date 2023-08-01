@@ -37,9 +37,17 @@ function setupEventHandlers() {
 
   const toggleColor = form.querySelector('input[name="potColor"]');
   toggleColor.addEventListener("change", () => {
-    if (toggleColor.value === "yes") {
+    if (toggleColor.checked) {
       colorOptions.style.display = "block";
     } else {
+      colorOptions.style.display = "none";
+    }
+    customizationObserver.notify();
+  });
+
+  const noColorOption = form.querySelector('input[name="potColor"][value="no"]');
+  noColorOption.addEventListener("change", () => {
+    if (noColorOption.checked) {
       colorOptions.style.display = "none";
     }
     customizationObserver.notify();
@@ -48,4 +56,5 @@ function setupEventHandlers() {
   updatePreview();
 }
 
-export {setupEventHandlers};
+
+export { setupEventHandlers };
