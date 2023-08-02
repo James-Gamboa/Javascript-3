@@ -46,7 +46,8 @@ button {
   flex-direction: column;
 }
 
-#recommendation {
+#recommendation,
+#preview {
   border: 1px solid #ccc;
   padding: 20px;
   max-width: 600px;
@@ -57,19 +58,22 @@ button {
   margin: 20px auto;
 }
 
-#recommendation .image-container {
+#recommendation .image-container,
+#preview .image-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 5px;
 }
 
-#recommendation img {
+#recommendation img,
+#preview img {
   max-width: 100%;
   max-height: 200px;
   margin-bottom: 0px;
 }
 
-#recommendation p {
+#recommendation p,
+#preview p {
   margin-bottom: 10px;
 }

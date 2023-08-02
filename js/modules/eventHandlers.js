@@ -32,6 +32,7 @@ function setupEventHandlers() {
   customizationObserver.subscribe(updatePreview);
 
   form.addEventListener("change", () => {
+    updatePreview();
     customizationObserver.notify();
   });
 
@@ -45,7 +46,9 @@ function setupEventHandlers() {
     customizationObserver.notify();
   });
 
-  const noColorOption = form.querySelector('input[name="potColor"][value="no"]');
+  const noColorOption = form.querySelector(
+    'input[name="potColor"][value="no"]'
+  );
   noColorOption.addEventListener("change", () => {
     if (noColorOption.checked) {
       colorOptions.style.display = "none";
@@ -55,6 +58,5 @@ function setupEventHandlers() {
 
   updatePreview();
 }
-
 
 export { setupEventHandlers };
