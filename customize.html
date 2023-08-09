@@ -29,25 +29,39 @@
       </fieldset>
       <fieldset>
         <legend>Pot color:</legend>
-        <label> 
-          <input type="radio" name="potColor" value="yes" /> Yes 
-        </label>
-        <label> 
-          <input type="radio" name="potColor" value="no" /> No 
-        </label>
-        <div id="colorOptions" style="display: none">
-          <label>
-            <input type="radio" name="colorOption" value="blue" /> Blue
-          </label>
-          <label>
-            <input type="radio" name="colorOption" value="pink" /> Pink
-          </label>
-          <label>
-            <input type="radio" name="colorOption" value="green" /> Green
-          </label>
-          <label>
-            <input type="radio" name="colorOption" value="purple" /> Purple
-          </label>
+        <label
+          ><input
+            type="radio"
+            name="potColor"
+            value="yes"
+            onchange="toggleColorOptions()"
+          />
+          Yes</label
+        >
+        <label
+          ><input
+            type="radio"
+            name="potColor"
+            value="no"
+            onchange="toggleColorOptions()"
+          />
+          No</label
+        >
+        <div id="colorOptions">
+          <label
+            ><input type="radio" name="colorOption" value="blue" /> Blue</label
+          >
+          <label
+            ><input type="radio" name="colorOption" value="pink" /> Pink</label
+          >
+          <label
+            ><input type="radio" name="colorOption" value="green" />
+            Green</label
+          >
+          <label
+            ><input type="radio" name="colorOption" value="purple" />
+            Purple</label
+          >
         </div>
       </fieldset>
       <fieldset>
@@ -90,7 +104,8 @@
         </label>
       </fieldset>
     </form>
-    <div id="preview" class="information"></div>
-    <script type="module" src="./js/customize.js"></script>
+    <div id="customizationPreview" class="information"></div>
+    <button id="checkAvailabilityBtn">Check store availability</button>
+    <script type="module" src="js/customize.js"></script>
   </body>
 </html>

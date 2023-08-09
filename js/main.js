@@ -9,8 +9,14 @@ document
     event.preventDefault();
     const plant = getPlantRecommendation();
     if (plant) {
-      sessionStorage.setItem("recommendedPlant", JSON.stringify(plant));
       renderRecommendation(plant);
+
+      const customizeBtn = document.createElement("button");
+      customizeBtn.id = "customizeBtn";
+      customizeBtn.textContent = "Customize";
+      document.getElementById("recommendation").appendChild(customizeBtn);
+
+      sessionStorage.setItem("recommendedPlant", JSON.stringify(plant));
     }
   });
 

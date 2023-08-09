@@ -19,5 +19,13 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
+  ignorePatterns: [
+    "node_modules/",
+    "dist/",
+    "build/",
+    "coverage/",
+    "babel.config.js", 
+    "jest.config.js",
+  ],
   rules: {},
 };

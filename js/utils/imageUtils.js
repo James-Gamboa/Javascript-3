@@ -9,27 +9,31 @@ function getPlantImageName(plantName) {
     case "Non-Toxic Plant (Low Light)":
       return "plant-fern";
     case "Toxic Plant (Low Light)":
-      return "plant-peace-lily";
+      return "plant-peace-lily-toxic";
     case "Non-Toxic Plant (Medium Light)":
       return "plant-monstera";
     case "Toxic Plant (Medium Light)":
-      return "plant-peace-lily";
+      return "plant-peace-lily-toxic";
     case "Non-Toxic Plant (Outdoor)":
       return "plant-cactus";
     case "Toxic Plant (Outdoor)":
-      return "plant-aloe";
+      return "plant-aloe-toxic";
     default:
       return "";
   }
 }
 
-function getPotImageName(material, style) {
+function getPotImageName(material, style, color) {
   let potName = `simple-${material}-pot`;
 
   if (style === "decorated") {
     potName += "-decorated";
   } else if (style === "bright-colors") {
     potName = `painted-${material}-pot-decorated`;
+  }
+
+  if (color === "yes") {
+    potName += `-${color}`;
   }
 
   return potName;
@@ -43,7 +47,21 @@ function getExtraImageName(extra) {
       return "pebbles";
     case "mini-plants":
       return "mini-plants";
+    default:
+      return "";
+  }
+}
+function getSoilImageName(soilType) {
+  switch (soilType) {
+    case "fertilized":
+      return "soil-fertilized";
+    case "drainage":
+      return "soil-drainage";
+    case "composted":
+      return "soil-composted";
+    default:
+      return ""; 
   }
 }
 
-export { getPlantImageName, getPotImageName, getExtraImageName };
+export { getPlantImageName, getPotImageName, getExtraImageName, getSoilImageName };

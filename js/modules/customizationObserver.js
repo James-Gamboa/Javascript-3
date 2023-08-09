@@ -12,7 +12,11 @@ class CustomizationObserver {
   }
 
   notify() {
-    this.subscribers.forEach((sub) => sub());
+    this.subscribers.forEach((subscriber) => {
+      if (typeof subscriber.update === "function") {
+        subscriber.update();
+      }
+    });
   }
 }
 
