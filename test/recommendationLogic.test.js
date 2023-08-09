@@ -1,7 +1,7 @@
 // @ts-nocheck
 /* eslint-disable no-undef */
 import "@testing-library/jest-dom/extend-expect";
-import { fireEvent, render, screen } from "@testing-library/dom";
+import { fireEvent, screen } from "@testing-library/dom";
 import { renderRecommendation } from "../js/modules/renderRecommendation.js";
 import { getPlantRecommendation } from "../js/modules/recommendationLogic.js";
 
