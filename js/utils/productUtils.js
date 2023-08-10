@@ -23,8 +23,10 @@ function showAlertMessage(message, color) {
   alertDiv.style.backgroundColor = color;
   alertDiv.textContent = message;
 
-  const productView = document.getElementById("productView");
-  productView.appendChild(alertDiv);
+  const productView = document.getElementById("customizationPreview");
+  if (productView) {
+    productView.appendChild(alertDiv);
+  }
 }
 
 function checkExtrasStock(selectedExtras) {
