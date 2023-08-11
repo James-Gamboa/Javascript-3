@@ -1,7 +1,10 @@
 // @ts-nocheck
-import { fetchInventory, fetchPlantInfo } from "../utils/apiUtils.js";
+import { Middleware } from "./middleware.js";
 import { renderPriceBreakdown, renderInventoryAlerts } from "./accordions.js";
-import { renderPlantDescription, renderCareTips }  from "../utils/plantDetails.js";
+import {
+  renderPlantDescription,
+  renderCareTips,
+} from "../utils/plantDetails.js";
 
 const prices = {
   aglaonema: 12.99,
@@ -45,29 +48,35 @@ async function updateFormWithInventoryData() {
   );
 
   try {
-    const [inventoryResults, plantInfo] = await Promise.all([
-      fetchInventory(customizationData),
-      fetchPlantInfo(customizationData.name),
-    ]);
+    const middleware = new Middleware(customizationData);
+    await middleware.fetchInventoryData();
+    await middleware.fetchPlantInfo();
 
-    const priceTotal = calculatePriceTotal(customizationData, inventoryResults);
-    renderPriceBreakdown(customizationData, inventoryResults, priceTotal);
-    renderPlantDescription(plantInfo);
-    renderCareTips(plantInfo);
+    const priceTotal = calculatePriceTotal(
+      customizationData,
+      middleware.inventoryResults
+    );
+    renderPriceBreakdown(
+      customizationData,
+      middleware.inventoryResults,
+      priceTotal
+    );
+    renderPlantDescription(middleware.plantInfo);
+    renderCareTips(middleware.plantInfo);
 
-    const stockAlert = generateInventoryAlerts(inventoryResults);
+    const stockAlert = generateInventoryAlerts(middleware.inventoryResults);
     if (stockAlert) {
       const availabilityAlert = document.getElementById("availabilityAlert");
       availabilityAlert.textContent = stockAlert;
       availabilityAlert.style.backgroundColor = "red";
       document.getElementById("orderNowBtn").disabled = true;
-      renderInventoryAlerts(inventoryResults);
+      renderInventoryAlerts(middleware.inventoryResults);
     } else {
       const availabilityAlert = document.getElementById("availabilityAlert");
       availabilityAlert.textContent = "";
       availabilityAlert.style.backgroundColor = "";
       document.getElementById("orderNowBtn").disabled = false;
-      renderInventoryAlerts(inventoryResults);
+      renderInventoryAlerts(middleware.inventoryResults);
     }
   } catch (error) {
     console.error("Error fetching data:", error);
