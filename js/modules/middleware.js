@@ -1,6 +1,5 @@
 // @ts-nocheck
-import { fetchInventory, fetchPlantInfo } from "./utils/apiUtils.js";
-
+import { fetchInventory, fetchPlantInfo } from "../utils/apiUtils.js";
 class Middleware {
   constructor(customizationData) {
     this.customizationData = customizationData;

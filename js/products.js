@@ -5,10 +5,53 @@ import {
   checkStockAvailability,
   showAlertMessage,
 } from "./utils/productUtils.js";
+import {
+  renderPriceBreakdown,
+  renderInventoryAlerts,
+} from "./modules/accordions.js";
+import {
+  renderCareTips,
+  renderPlantDescription,
+} from "./utils/plantDetails.js";
+
+document.addEventListener("DOMContentLoaded", function () {
+  const accordionButtons = document.querySelectorAll(".accordion-btn");
+  accordionButtons.forEach((button) => {
+    button.addEventListener("click", toggleAccordion);
+  });
+});
+
+function toggleAccordion(event) {
+  const accordionButton = event.target;
+  const accordionContent = accordionButton.nextElementSibling;
+
+  const allAccordions = document.querySelectorAll(".accordion-content");
+  allAccordions.forEach((content) => {
+    if (content !== accordionContent) {
+      content.style.display = "none";
+    }
+  });
+
+  if (accordionContent.style.display === "block") {
+    accordionContent.style.display = "none";
+  } else {
+    accordionContent.style.display = "block";
+
+    if (accordionButton.id === "priceBreakdownBtn") {
+      renderPriceBreakdown(); 
+    } else if (accordionButton.id === "inventoryAlertsBtn") {
+      renderInventoryAlerts(); 
+    } else if (accordionButton.id === "plantDescriptionBtn") {
+      renderPlantDescription(); 
+    } else if (accordionButton.id === "careTipsBtn") {
+      renderCareTips(); 
+    }
+  }
+}
 
 function getCustomizationData() {
   const customizationData = JSON.parse(
-    sessionStorage.getItem("customizationData")
+    sessionStorage.getItem("customizationData"),
   );
   return customizationData || null;
 }
@@ -30,12 +73,12 @@ function renderProductView(customizationData) {
   } else if (stockAvailability === "limited-stock") {
     showAlertMessage(
       "One of the items in your order has limited stock. Order soon!",
-      "yellow"
+      "yellow",
     );
   } else if (stockAvailability === "out-of-stock") {
     showAlertMessage(
       "One of the items in your order is out of stock. Please check the inventory alerts.",
-      "red"
+      "red",
     );
   }
 

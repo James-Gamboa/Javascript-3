@@ -60,8 +60,13 @@ function getSoilImageName(soilType) {
     case "composted":
       return "soil-composted";
     default:
-      return ""; 
+      return "";
   }
 }
 
-export { getPlantImageName, getPotImageName, getExtraImageName, getSoilImageName };
+export {
+  getPlantImageName,
+  getPotImageName,
+  getExtraImageName,
+  getSoilImageName,
+};

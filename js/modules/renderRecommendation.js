@@ -4,7 +4,7 @@ import {
   getPlantImageName,
   getPotImageName,
   getExtraImageName,
-  getSoilImageName
+  getSoilImageName,
 } from "../utils/imageUtils.js";
 
 function renderRecommendation(plant, container) {
@@ -37,14 +37,14 @@ function renderRecommendation(plant, container) {
     const potImage = document.createElement("img");
     potImage.src = `Assets/${getPotImageName(
       plant.potMaterial,
-      plant.potStyle
+      plant.potStyle,
     )}.png`;
     potImage.alt = `${plant.potMaterial}`;
     imageContainer.appendChild(potImage);
   }
 
   const soilImage = document.createElement("img");
-  soilImage.src = `Assets/soil-${getSoilImageName(plant.soil)}.png`; 
+  soilImage.src = `Assets/soil-${getSoilImageName(plant.soil)}.png`;
   soilImage.alt = `Soil: ${plant.soil}`;
   imageContainer.appendChild(soilImage);
 

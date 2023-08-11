@@ -3,7 +3,7 @@ import { prices } from "./customizationProduct.js";
 
 function renderPriceBreakdown(customizationData, inventoryResults, totalPrice) {
   const priceBreakdownContainer = document.getElementById(
-    "priceBreakdownContainer"
+    "priceBreakdownContainer",
   );
 
   priceBreakdownContainer.innerHTML = "";
@@ -44,7 +44,7 @@ function renderPriceBreakdown(customizationData, inventoryResults, totalPrice) {
 
   const plantItem = document.createElement("li");
   const plant = inventoryResults.find(
-    (item) => item.name === customizationData.name
+    (item) => item.name === customizationData.name,
   );
   if (plant) {
     plantItem.textContent = `${plant.name}: $${prices[plant.name].toFixed(2)}`;
@@ -61,7 +61,7 @@ function renderPriceBreakdown(customizationData, inventoryResults, totalPrice) {
 
 function renderInventoryAlerts(inventoryResults) {
   const inventoryAlertsContainer = document.getElementById(
-    "inventoryAlertsContainer"
+    "inventoryAlertsContainer",
   );
 
   inventoryAlertsContainer.innerHTML = "";

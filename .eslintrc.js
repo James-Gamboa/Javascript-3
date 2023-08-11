@@ -24,7 +24,7 @@ module.exports = {
     "dist/",
     "build/",
     "coverage/",
-    "babel.config.js", 
+    "babel.config.js",
     "jest.config.js",
   ],
   rules: {},

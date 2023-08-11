@@ -4,7 +4,7 @@ import { fetchPlantInfo } from "./apiUtils.js";
 async function renderPlantDescription() {
   const plantName = document.querySelector('select[name="plantName"]').value;
   const plantInfo = await fetchPlantInfo(plantName);
-  
+
   const plantDescriptionAccordion = document.getElementById("plantDescription");
   plantDescriptionAccordion.innerHTML = "";
 
@@ -20,7 +20,7 @@ async function renderPlantDescription() {
 async function renderCareTips() {
   const plantName = document.querySelector('select[name="plantName"]').value;
   const plantInfo = await fetchPlantInfo(plantName);
-  
+
   const careTipsAccordion = document.getElementById("careTips");
   careTipsAccordion.innerHTML = "";
 
@@ -33,7 +33,8 @@ async function renderCareTips() {
   for (const key in careDetails) {
     const careItem = document.createElement("li");
     const careItemTitle = document.createElement("strong");
-    careItemTitle.textContent = key.charAt(0).toUpperCase() + key.slice(1) + ": ";
+    careItemTitle.textContent =
+      key.charAt(0).toUpperCase() + key.slice(1) + ": ";
     careItem.appendChild(careItemTitle);
     careItem.appendChild(document.createTextNode(careDetails[key]));
     careList.appendChild(careItem);

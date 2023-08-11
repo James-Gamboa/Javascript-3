@@ -77,3 +77,16 @@ button {
 #customizationPreview p {
   margin-bottom: 10px;
 }
+
+#orderNowBtn {
+  display: flex;
+  justify-content: center;
+  margin: 2.5rem auto;
+}
+
+#accordionsContainer {
+  display: flex;
+  flex-direction: initial;
+  align-items: center;
+  justify-content: space-evenly;
+}

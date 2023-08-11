@@ -26,11 +26,17 @@ describe("Form submission and recommendation", () => {
     const container = document.createElement("div");
     renderRecommendation({}, container);
 
-    fireEvent.click(screen.getByRole("radio", { name: "Inside with some indirect light" }));
+    fireEvent.click(
+      screen.getByRole("radio", { name: "Inside with some indirect light" }),
+    );
     fireEvent.click(screen.getByRole("radio", { name: "No" }));
     fireEvent.click(screen.getByRole("radio", { name: "Yes" }));
     fireEvent.click(screen.getByRole("radio", { name: "Underwater" }));
-    fireEvent.click(screen.getByRole("radio", { name: "I like minimalism and material colors" }));
+    fireEvent.click(
+      screen.getByRole("radio", {
+        name: "I like minimalism and material colors",
+      }),
+    );
     fireEvent.click(screen.getByRole("checkbox", { name: "Pebbles" }));
 
     fireEvent.submit(screen.getByTestId("plantForm"));
@@ -42,4 +48,3 @@ describe("Form submission and recommendation", () => {
     expect(container.textContent).toContain("Pebbles");
   });
 });
-

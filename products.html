@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -9,13 +9,25 @@
   <body>
     <h1>Product Details</h1>
     <div id="customizationPreview" class="information"></div>
-    <div id="accordionsContainer">
-      <div id="priceBreakdownContainer"></div>
-      <div id="inventoryAlertsContainer"></div>
-      <div id="plantDescription"></div>
-      <div id="careTips"></div>
-    </div>
     <button id="orderNowBtn" disabled>Order Now</button>
+    <div id="accordionsContainer">
+      <div class="accordion">
+        <button class="accordion-btn">Price Breakdown</button>
+        <div class="accordion-content" id="priceBreakdownContainer"></div>
+      </div>
+      <div class="accordion">
+        <button class="accordion-btn">Inventory Alerts</button>
+        <div class="accordion-content" id="inventoryAlertsContainer"></div>
+      </div>
+      <div class="accordion">
+        <button class="accordion-btn">Plant Description</button>
+        <div class="accordion-content" id="plantDescription"></div>
+      </div>
+      <div class="accordion">
+        <button class="accordion-btn">Caring Tips</button>
+        <div class="accordion-content" id="careTips"></div>
+      </div>
+    </div>
     <script type="module" src="js/products.js"></script>
   </body>
 </html>

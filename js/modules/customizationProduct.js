@@ -44,7 +44,7 @@ const prices = {
 
 async function updateFormWithInventoryData() {
   const customizationData = JSON.parse(
-    sessionStorage.getItem("customizationData")
+    sessionStorage.getItem("customizationData"),
   );
 
   try {
@@ -54,12 +54,12 @@ async function updateFormWithInventoryData() {
 
     const priceTotal = calculatePriceTotal(
       customizationData,
-      middleware.inventoryResults
+      middleware.inventoryResults,
     );
     renderPriceBreakdown(
       customizationData,
       middleware.inventoryResults,
-      priceTotal
+      priceTotal,
     );
     renderPlantDescription(middleware.plantInfo);
     renderCareTips(middleware.plantInfo);
@@ -97,7 +97,7 @@ function calculatePriceTotal(customizationData, inventoryResults) {
     prices[customizationData.potColor];
 
   const plantItem = inventoryResults.find(
-    (item) => item.name === customizationData.name
+    (item) => item.name === customizationData.name,
   );
   if (plantItem) {
     totalPrice += prices[plantItem.name];

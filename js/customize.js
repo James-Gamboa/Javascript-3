@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
   updateColorOptionsDisplay();
 
   const recommendedPlantData = JSON.parse(
-    sessionStorage.getItem("recommendedPlant")
+    sessionStorage.getItem("recommendedPlant"),
   );
   if (recommendedPlantData) {
     renderCustomizationPreview(recommendedPlantData);
@@ -21,20 +21,20 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector('select[name="plantName"]').value =
       recommendedPlantData.name;
     document.querySelector(
-      `input[name="soil"][value="${recommendedPlantData.soil}"]`
+      `input[name="soil"][value="${recommendedPlantData.soil}"]`,
     ).checked = true;
     document.querySelector(
-      `input[name="potMaterial"][value="${recommendedPlantData.potMaterial}"]`
+      `input[name="potMaterial"][value="${recommendedPlantData.potMaterial}"]`,
     ).checked = true;
     document.querySelector(
-      `input[name="potDecorations"][value="${recommendedPlantData.potStyle}"]`
+      `input[name="potDecorations"][value="${recommendedPlantData.potStyle}"]`,
     ).checked = true;
     document.querySelector(
-      `input[name="potColor"][value="${recommendedPlantData.potColor}"]`
+      `input[name="potColor"][value="${recommendedPlantData.potColor}"]`,
     ).checked = true;
     recommendedPlantData.extras.forEach((extra) => {
       document.querySelector(
-        `input[name="extras"][value="${extra}"]`
+        `input[name="extras"][value="${extra}"]`,
       ).checked = true;
     });
   }
@@ -46,22 +46,22 @@ document
   .getElementById("customizeForm")
   .addEventListener("change", function () {
     const selectedPlant = document.querySelector(
-      'select[name="plantName"]'
+      'select[name="plantName"]',
     ).value;
     const potMaterial = document.querySelector(
-      'input[name="potMaterial"]:checked'
+      'input[name="potMaterial"]:checked',
     ).value;
     const potDecorations = document.querySelector(
-      'input[name="potDecorations"]:checked'
+      'input[name="potDecorations"]:checked',
     ).value;
     const potColor = document.querySelector(
-      'input[name="potColor"]:checked'
+      'input[name="potColor"]:checked',
     ).value;
 
     const potImage = `Assets/${getPotImageName(
       potMaterial,
       potDecorations,
-      potColor
+      potColor,
     )}.png`;
     const plantImage = `Assets/${getPlantImageName(selectedPlant)}.png`;
 
@@ -72,7 +72,7 @@ document
       potStyle: potDecorations,
       potColor,
       extras: Array.from(
-        document.querySelectorAll('input[name="extras"]:checked')
+        document.querySelectorAll('input[name="extras"]:checked'),
       ).map((input) => input.value),
       plantImage,
       potImage,
@@ -87,7 +87,7 @@ document
 function updateColorOptionsDisplay() {
   const colorOptionsDiv = document.getElementById("colorOptions");
   const potColorInput = document.querySelector(
-    'input[name="potColor"]:checked'
+    'input[name="potColor"]:checked',
   );
 
   if (potColorInput && potColorInput.value === "yes") {
@@ -97,15 +97,24 @@ function updateColorOptionsDisplay() {
   }
 }
 
-document.getElementById("checkAvailabilityBtn").addEventListener("click", function () {
-  const customizationData = {
-    name: document.querySelector('select[name="plantName"]').value,
-    soil: document.querySelector('input[name="soil"]:checked').value,
-    potMaterial: document.querySelector('input[name="potMaterial"]:checked').value,
-    potStyle: document.querySelector('input[name="potDecorations"]:checked').value,
-    potColor: document.querySelector('input[name="potColor"]:checked').value,
-    extras: Array.from(document.querySelectorAll('input[name="extras"]:checked')).map((input) => input.value),
-  };
-  sessionStorage.setItem("customizationData", JSON.stringify(customizationData));
-  window.location.href = "products.html";
-});
+document
+  .getElementById("checkAvailabilityBtn")
+  .addEventListener("click", function () {
+    const customizationData = {
+      name: document.querySelector('select[name="plantName"]').value,
+      soil: document.querySelector('input[name="soil"]:checked').value,
+      potMaterial: document.querySelector('input[name="potMaterial"]:checked')
+        .value,
+      potStyle: document.querySelector('input[name="potDecorations"]:checked')
+        .value,
+      potColor: document.querySelector('input[name="potColor"]:checked').value,
+      extras: Array.from(
+        document.querySelectorAll('input[name="extras"]:checked'),
+      ).map((input) => input.value),
+    };
+    sessionStorage.setItem(
+      "customizationData",
+      JSON.stringify(customizationData),
+    );
+    window.location.href = "products.html";
+  });
