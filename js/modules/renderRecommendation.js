@@ -44,7 +44,7 @@ function renderRecommendation(plant, container) {
   }
 
   const soilImage = document.createElement("img");
-  soilImage.src = `Assets/soil-${getSoilImageName(plant.soil)}.png`;
+  soilImage.src = `Assets/${getSoilImageName(plant.soil)}.png`;
   soilImage.alt = `Soil: ${plant.soil}`;
   imageContainer.appendChild(soilImage);
 

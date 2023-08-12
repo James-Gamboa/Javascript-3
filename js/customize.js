@@ -2,7 +2,11 @@
 import { updateFormFromURLParams } from "./utils/formUtils.js";
 import { CustomizationObserver } from "./modules/customizationObserver.js";
 import { renderCustomizationPreview } from "./modules/renderCustomizationPreview.js";
-import { getPotImageName, getPlantImageName } from "./utils/imageUtils.js";
+import {
+  getPotImageName,
+  getPlantImageName,
+  getSoilImageName,
+} from "./utils/imageUtils.js";
 
 const customizationObserver = new CustomizationObserver();
 const customizationPreview = document.getElementById("customizationPreview");
@@ -65,9 +69,12 @@ document
     )}.png`;
     const plantImage = `Assets/${getPlantImageName(selectedPlant)}.png`;
 
+    const soilInput = document.querySelector('input[name="soil"]:checked');
+    const selectedSoil = soilInput ? soilInput.getAttribute("value") : "";
+
     const customizationData = {
       name: selectedPlant,
-      soil: document.querySelector('input[name="soil"]:checked').value,
+      soil: selectedSoil,
       potMaterial,
       potStyle: potDecorations,
       potColor,
@@ -82,6 +89,7 @@ document
     customizationObserver.notify();
 
     updateColorOptionsDisplay();
+    updateSoilImage(customizationData.soil);
   });
 
 function updateColorOptionsDisplay() {
@@ -94,6 +102,14 @@ function updateColorOptionsDisplay() {
     colorOptionsDiv.style.display = "block";
   } else {
     colorOptionsDiv.style.display = "none";
+  }
+}
+
+function updateSoilImage(soilType) {
+  const soilImage = document.getElementById("soilImage");
+  if (soilImage) {
+    soilImage.src = `Assets/${getSoilImageName(soilType)}.png`;
+    soilImage.alt = soilType;
   }
 }
 

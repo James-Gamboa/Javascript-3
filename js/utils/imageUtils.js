@@ -51,6 +51,7 @@ function getExtraImageName(extra) {
       return "";
   }
 }
+
 function getSoilImageName(soilType) {
   switch (soilType) {
     case "fertilized":

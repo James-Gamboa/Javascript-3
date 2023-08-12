@@ -1,6 +1,10 @@
 // @ts-nocheck
 import { CustomizationObserver } from "./customizationObserver.js";
-import { getPlantImageName, getPotImageName } from "../utils/imageUtils.js";
+import {
+  getPlantImageName,
+  getPotImageName,
+  getSoilImageName,
+} from "../utils/imageUtils.js";
 import { getRealPlantName } from "../utils/getNamePlantsUtils.js";
 
 const customizationPreview = document.getElementById("customizationPreview");
@@ -19,6 +23,11 @@ function renderCustomizationPreview(plant) {
   plantImage.src = `Assets/${getPlantImageName(plant.name)}.png`;
   plantImage.alt = plant.name;
   imageContainer.appendChild(plantImage);
+
+  const soilImage = document.createElement("img");
+  soilImage.src = `Assets/${getSoilImageName(plant.soil)}.png`;
+  soilImage.alt = plant.soil;
+  imageContainer.appendChild(soilImage);
 
   if (plant.extras.length > 0) {
     for (const extra of plant.extras) {

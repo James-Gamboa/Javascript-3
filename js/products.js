@@ -38,13 +38,13 @@ function toggleAccordion(event) {
     accordionContent.style.display = "block";
 
     if (accordionButton.id === "priceBreakdownBtn") {
-      renderPriceBreakdown(); 
+      renderPriceBreakdown();
     } else if (accordionButton.id === "inventoryAlertsBtn") {
-      renderInventoryAlerts(); 
+      renderInventoryAlerts();
     } else if (accordionButton.id === "plantDescriptionBtn") {
-      renderPlantDescription(); 
+      renderPlantDescription();
     } else if (accordionButton.id === "careTipsBtn") {
-      renderCareTips(); 
+      renderCareTips();
     }
   }
 }
